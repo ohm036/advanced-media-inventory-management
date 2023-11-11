@@ -128,26 +128,97 @@ namespace Assignment
 
                 switch (choice) {
                     case 1:
-                        
+                        Console.WriteLine("Enter Title:");
+                        string? title = Console.ReadLine();
+
+                        foreach (var media in Inventory) {
+                            if (media.Title == title) {
+                                Inventory.Remove(media);
+                            }
+                        }
                         continue;
                     case 2:
-                        
+                        Console.WriteLine("Enter Genre:");
+                        string? genre = Console.ReadLine();
+
+                        foreach (var media in Inventory) {
+                            if (media.Genre == genre) {
+                                Inventory.Remove(media);
+                            }
+                        }
                         continue;
                     case 3:
+                        Console.WriteLine("Enter Release Year:");
+                        int releaseyear = Convert.ToInt32(Console.ReadLine());
+
+                        foreach (var media in Inventory) {
+                            if (media.ReleaseYear == releaseyear) {
+                                Inventory.Remove(media);
+                            }
+                        }
                         continue;
                     case 4:
+                        Console.WriteLine("Enter author's name:");
+                        string? author = Console.ReadLine();
+
+                        foreach (var media in Inventory) {
+                            if (media is Book && (((Book)media).Author) == author) {
+                                Inventory.Remove(media);
+                            }
+                        }
                         continue;
                     case 5:
+                        Console.WriteLine("Enter artist's name:");
+                        string? artist = Console.ReadLine();
+
+                        foreach (var media in Inventory) {
+                            if (media is CD && (((CD)media).Artist) == artist) {
+                                Inventory.Remove(media);
+                            }
+                        }
                         continue;
                     case 6:
+                        Console.WriteLine("Enter director's name:");
+                        string? director = Console.ReadLine();
+
+                        foreach (var media in Inventory) {
+                            if (media is DVD && (((DVD)media).Director) == director) {
+                                Inventory.Remove(media);
+                            }
+                        }
                         continue;
                     case 7:
+                        Console.WriteLine("Enter studio's name:");
+                        string? studio = Console.ReadLine();
+
+                        foreach (var media in Inventory) {
+                            if (media is DVD && (((DVD)media).Studio) == studio) {
+                                Inventory.Remove(media);
+                            }
+                        }
                         continue;
                     case 8:
+                        Console.WriteLine("Enter publisher's name:");
+                        string? publisher = Console.ReadLine();
+
+                        foreach (var media in Inventory) {
+                            if (media is Book && (((Book)media).Publisher) == publisher) {
+                                Inventory.Remove(media);
+                            }
+                        }
                         continue;
                     case 9:
+                        Console.WriteLine("Enter record company's name:");
+                        string? recordcompany = Console.ReadLine();
+
+                        foreach (var media in Inventory) {
+                            if (media is CD && (((CD)media).RecordCompany) == recordcompany) {
+                                Inventory.Remove(media);
+                            }
+                        }
                         continue;
                     case 10:
+                        Console.WriteLine("\nGoing back...");
                         break;
                     default:
                         Console.WriteLine("Invalid choice.");
