@@ -75,8 +75,11 @@ namespace Assignment
                     n_books++;
                 }
             }
+            int res = n_books;
 
-            return n_books;
+            n_books = 0;
+
+            return res;
         }
         public int GetCDsCount () {
             foreach (var media in Inventory) {
@@ -85,7 +88,11 @@ namespace Assignment
                 }
             }
 
-            return n_CDs;
+            int res = n_CDs;
+            
+            n_CDs = 0;
+
+            return res;
         }
         public int GetDVDsCount () {
             foreach (var media in Inventory) {
@@ -94,7 +101,11 @@ namespace Assignment
                 }
             }
 
-            return n_DVDs;
+            int res = n_DVDs;
+            
+            n_DVDs = 0;
+
+            return res;
         }
 
         public void AddMedia () {
@@ -271,12 +282,64 @@ namespace Assignment
 
                 switch (choice) {
                     case 1:
+                        Console.WriteLine("Enter the title:");
+                        string? title = Console.ReadLine();
+
+                        var TitleMatches = Inventory
+                        .Where(media => media.Title?
+                        .IndexOf(title,StringComparison.OrdinalIgnoreCase) >= 0)
+                        .ToList();
+
+                        if (TitleMatches.Count == 0) {
+                            Console.WriteLine("No results found!");
+                        } else {
+                            ShowMatches(TitleMatches);
+                        }
+                        
                         break;
                     case 2:
+                        Console.WriteLine("Enter the genre:");
+                        string? genre = Console.ReadLine();
+
+                        var GenreMatches = Inventory
+                        .Where(media => media.Genre?
+                        .IndexOf(genre,StringComparison.OrdinalIgnoreCase) >= 0)
+                        .ToList();
+
+                        if (GenreMatches.Count == 0) {
+                            Console.WriteLine("No results found!");
+                        } else {
+                            ShowMatches(GenreMatches);
+                        }
                         break;
                     case 3:
+                        Console.WriteLine("Enter release year:");
+                        int r_year = Convert.ToInt32(Console.ReadLine());
+
+                        var RYearMatches = Inventory
+                        .Where(media => media.ReleaseYear == r_year)
+                        .ToList();
+
+                        if (RYearMatches.Count == 0) {
+                            Console.WriteLine("No results found!");
+                        } else {
+                            ShowMatches(RYearMatches);
+                        }
                         break;
                     case 4:
+                        Console.WriteLine("Enter author's name:");
+                        string? genre = Console.ReadLine();
+
+                        var GenreMatches = Inventory
+                        .Where(media => media.Genre?
+                        .IndexOf(genre,StringComparison.OrdinalIgnoreCase) >= 0)
+                        .ToList();
+
+                        if (GenreMatches.Count == 0) {
+                            Console.WriteLine("No results found!");
+                        } else {
+                            ShowMatches(GenreMatches);
+                        }
                         break;
                     case 5: 
                         break;
@@ -297,6 +360,32 @@ namespace Assignment
                 }
 
                 break;
+            }
+        }
+
+        private void ShowMatches (List<Media<string>> matches) {
+            int i = 1;
+            foreach (var media in matches) {
+
+                if (media is Book b) {
+
+                    Console.WriteLine(i + ". Book:");
+                    Console.WriteLine($"Title: {b.Title}\nAuthor: {b.Author}\nGenre: {b.Genre}\nRelease Year: {b.ReleaseYear}\nPublisher: {b.Publisher}");
+
+                } else if (media is CD cd) {
+
+                    Console.WriteLine(i + ".CD:");
+                    Console.WriteLine($"Title: {cd.Title}\nArtist: {cd.Artist}\nGenre: {cd.Genre}\nRelease Year: {cd.ReleaseYear}\nRecording Comapny: {cd.RecordCompany}");
+
+                } else if (media is DVD dvd) {
+
+                    Console.WriteLine(i + ". DVD:");
+                    Console.WriteLine($"Title: {dvd.Title}\nDirector: {dvd.Director}\nGenre: {dvd.Genre}\nRelease Year: {dvd.ReleaseYear}\nStudio: {dvd.Studio}");
+
+                }
+
+                Console.WriteLine();
+                i++;
             }
         }
 
