@@ -1,0 +1,14 @@
+D:\Code Files\C#\Advanced Media Inventory Management\bin\Debug\net7.0\Advanced Media Inventory Management.exe
+D:\Code Files\C#\Advanced Media Inventory Management\bin\Debug\net7.0\Advanced Media Inventory Management.deps.json
+D:\Code Files\C#\Advanced Media Inventory Management\bin\Debug\net7.0\Advanced Media Inventory Management.runtimeconfig.json
+D:\Code Files\C#\Advanced Media Inventory Management\bin\Debug\net7.0\Advanced Media Inventory Management.dll
+D:\Code Files\C#\Advanced Media Inventory Management\bin\Debug\net7.0\Advanced Media Inventory Management.pdb
+D:\Code Files\C#\Advanced Media Inventory Management\obj\Debug\net7.0\Advanced Media Inventory Management.GeneratedMSBuildEditorConfig.editorconfig
+D:\Code Files\C#\Advanced Media Inventory Management\obj\Debug\net7.0\Advanced Media Inventory Management.AssemblyInfoInputs.cache
+D:\Code Files\C#\Advanced Media Inventory Management\obj\Debug\net7.0\Advanced Media Inventory Management.AssemblyInfo.cs
+D:\Code Files\C#\Advanced Media Inventory Management\obj\Debug\net7.0\Advanced Media Inventory Management.csproj.CoreCompileInputs.cache
+D:\Code Files\C#\Advanced Media Inventory Management\obj\Debug\net7.0\Advanced Media Inventory Management.dll
+D:\Code Files\C#\Advanced Media Inventory Management\obj\Debug\net7.0\refint\Advanced Media Inventory Management.dll
+D:\Code Files\C#\Advanced Media Inventory Management\obj\Debug\net7.0\Advanced Media Inventory Management.pdb
+D:\Code Files\C#\Advanced Media Inventory Management\obj\Debug\net7.0\Advanced Media Inventory Management.genruntimeconfig.cache
+D:\Code Files\C#\Advanced Media Inventory Management\obj\Debug\net7.0\ref\Advanced Media Inventory Management.dll

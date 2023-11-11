@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "1JgK6xIogJY8qQyVd2ciUHclhKZxOtZ7be+OYCncZOPfPWZTkRxtbsveZnxW6lAPK3vmdax3cj5ge5fxCDmRrw==",
+  "success": true,
+  "projectFilePath": "D:\\Code Files\\C#\\advanced-media-inventory-management\\Advanced Media Inventory Management.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\omarh\\.nuget\\packages\\microsoft.netcore.app.ref\\7.0.8\\microsoft.netcore.app.ref.7.0.8.nupkg.sha512",
+    "C:\\Users\\omarh\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\7.0.8\\microsoft.windowsdesktop.app.ref.7.0.8.nupkg.sha512",
+    "C:\\Users\\omarh\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\7.0.8\\microsoft.aspnetcore.app.ref.7.0.8.nupkg.sha512",
+    "C:\\Users\\omarh\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\7.0.8\\microsoft.netcore.app.host.win-x64.7.0.8.nupkg.sha512"
+  ],
+  "logs": []
+}
