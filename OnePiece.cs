@@ -287,7 +287,7 @@ namespace Assignment
 
                         var TitleMatches = Inventory
                         .Where(media => media.Title?
-                        .IndexOf(title,StringComparison.OrdinalIgnoreCase) >= 0)
+                        .IndexOf(title, StringComparison.OrdinalIgnoreCase) >= 0)
                         .ToList();
 
                         if (TitleMatches.Count == 0) {
@@ -303,7 +303,7 @@ namespace Assignment
 
                         var GenreMatches = Inventory
                         .Where(media => media.Genre?
-                        .IndexOf(genre,StringComparison.OrdinalIgnoreCase) >= 0)
+                        .IndexOf(genre, StringComparison.OrdinalIgnoreCase) >= 0)
                         .ToList();
 
                         if (GenreMatches.Count == 0) {
@@ -328,30 +328,96 @@ namespace Assignment
                         break;
                     case 4:
                         Console.WriteLine("Enter author's name:");
-                        string? genre = Console.ReadLine();
+                        string? auth = Console.ReadLine();
 
-                        var GenreMatches = Inventory
-                        .Where(media => media.Genre?
-                        .IndexOf(genre,StringComparison.OrdinalIgnoreCase) >= 0)
+                        var AuthMatches = Inventory
+                        .Where(media => media is Book && ((Book)media).Author?
+                        .IndexOf(auth, StringComparison.OrdinalIgnoreCase) >= 0)
                         .ToList();
 
-                        if (GenreMatches.Count == 0) {
+                        if (AuthMatches.Count == 0) {
                             Console.WriteLine("No results found!");
                         } else {
-                            ShowMatches(GenreMatches);
+                            ShowMatches(AuthMatches);
                         }
                         break;
-                    case 5: 
+                    case 5:
+                        Console.WriteLine("Enter artist's name:");
+                        string? artt = Console.ReadLine();
+
+                        var ArttMatches = Inventory
+                        .Where(media => media is CD && ((CD)media).Artist?
+                        .IndexOf(artt, StringComparison.OrdinalIgnoreCase) >= 0)
+                        .ToList();
+
+                        if (ArttMatches.Count == 0) {
+                            Console.WriteLine("No results found!");
+                        } else {
+                            ShowMatches(ArttMatches);
+                        } 
                         break;
                     case 6:
+                        Console.WriteLine("Enter director's name:");
+                        string? dir = Console.ReadLine();
+
+                        var DirMatches = Inventory
+                        .Where(media => media is DVD && ((DVD)media).Director?
+                        .IndexOf(dir, StringComparison.OrdinalIgnoreCase) >= 0)
+                        .ToList();
+
+                        if (DirMatches.Count == 0) {
+                            Console.WriteLine("No results found!");
+                        } else {
+                            ShowMatches(DirMatches);
+                        } 
                         break;
                     case 7:
+                        Console.WriteLine("Enter studio's name:");
+                        string? std = Console.ReadLine();
+
+                        var StdMatches = Inventory
+                        .Where(media => media is DVD && ((DVD)media).Studio?
+                        .IndexOf(std, StringComparison.OrdinalIgnoreCase) >= 0)
+                        .ToList();
+
+                        if (StdMatches.Count == 0) {
+                            Console.WriteLine("No results found!");
+                        } else {
+                            ShowMatches(StdMatches);
+                        } 
                         break;
                     case 8:
+                        Console.WriteLine("Enter publisher's name:");
+                        string? pub = Console.ReadLine();
+
+                        var PubMatches = Inventory
+                        .Where(media => media is Book && ((Book)media).Publisher?
+                        .IndexOf(pub, StringComparison.OrdinalIgnoreCase) >= 0)
+                        .ToList();
+
+                        if (PubMatches.Count == 0) {
+                            Console.WriteLine("No results found!");
+                        } else {
+                            ShowMatches(PubMatches);
+                        } 
                         break;
                     case 9:
+                        Console.WriteLine("Enter record company's name:");
+                        string? rec = Console.ReadLine();
+
+                        var RecMatches = Inventory
+                        .Where(media => media is CD && ((CD)media).RecordCompany?
+                        .IndexOf(rec, StringComparison.OrdinalIgnoreCase) >= 0)
+                        .ToList();
+
+                        if (RecMatches.Count == 0) {
+                            Console.WriteLine("No results found!");
+                        } else {
+                            ShowMatches(RecMatches);
+                        } 
                         break;
                     case 10:
+                        Console.WriteLine("\nGoing back...");
                         break;
                     default:
                         Console.WriteLine("Invalid choice.");
