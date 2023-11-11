@@ -431,6 +431,7 @@ namespace Assignment
 
         private void ShowMatches (List<Media<string>> matches) {
             int i = 1;
+            Console.WriteLine();
             foreach (var media in matches) {
 
                 if (media is Book b) {
@@ -457,14 +458,90 @@ namespace Assignment
 
         //Implements all necessary functionaities for listing media of the inventory:
         public void ListItems () {
+            Console.WriteLine("Showing all items in the inventory:");
 
+            for (int i = 0; i < 70; i++) {
+                Console.Write("-");
+            }
+
+            ShowMatches(Inventory); //It has the same functionality. It shows all media from a list of media objects.
         }
 
         //Implements all necessary functionaities for getting insights of to the inventory:
         public void GetInsights () {
 
-        } 
+            Console.WriteLine($"Total: {Inventory.Count}");
+            Console.WriteLine($"Books: {GetBooksCount()}");
+            Console.WriteLine($"CDs: {GetCDsCount()}");
+            Console.WriteLine($"DVDs: {GetDVDsCount()}");
         
+        } 
+
+
+        // public void UpdateMedia()
+        // {
+        //     Console.WriteLine("Enter the title you want to update:");
+        //     string? UTitle = Console.ReadLine();
+
+        //     var MediaListToUpdate = Inventory
+        //                 .Where(media => media.Title?
+        //                 .IndexOf(UTitle, StringComparison.OrdinalIgnoreCase) >= 0)
+        //                 .ToList();
+
+        //     if (MediaListToUpdate.Count == 0)
+        //     {
+        //         Console.WriteLine("Media not found.");
+        //         return;
+        //     }
+
+        //     Console.WriteLine($"Found the following matches with '{UTitle}':");
+        //     ShowMatches(MediaListToUpdate);
+
+        //     Console.WriteLine("Which property do you want to update?");
+        //     Console.WriteLine("[1] Title");
+        //     Console.WriteLine("[2] Genre");
+        //     Console.WriteLine("[3] Release Year");
+
+        //     if (MediaListToUpdate.First() is Book)
+        //     {
+        //         Console.WriteLine("[4] Author");
+        //         Console.WriteLine("[5] Publisher");
+        //     }
+        //     else if (MediaListToUpdate.First() is CD)
+        //     {
+        //         Console.WriteLine("[4] Artist");
+        //         Console.WriteLine("[5] Record Company");
+        //     }
+        //     else if (MediaListToUpdate.First() is DVD)
+        //     {
+        //         Console.WriteLine("[4] Director");
+        //         Console.WriteLine("[5] Studio");
+        //     }
+
+        //     Console.WriteLine("[6] Go back");
+
+        //     Console.Write("Enter your choice: ");
+        //     int choice = Convert.ToInt32(Console.ReadLine());
+
+        //     switch (choice)
+        //     {
+        //         case 1:
+        //             Console.WriteLine("Enter the new title:");
+        //             string? NewTitle = Console.ReadLine();
+        //             foreach (var media in MediaListToUpdate)
+        //             {
+        //                 media.Title = NewTitle;
+        //             }
+        //             break;
+        //         // Other cases...
+        //         case 6:
+        //             Console.WriteLine("\nGoing back...");
+        //             break;
+        //         default:
+        //             Console.WriteLine("Invalid choice.");
+        //             break;
+        //     }
+        // }
     }
 
 //Implementing all necessary steps to initialize an object. Using the respective constructors for this purpose to make things better.
@@ -503,6 +580,7 @@ namespace Assignment
             Genre = gen;
             Artist = artt;
             ReleaseYear = release;
+            RecordCompany = company;
             TrackList = tracklist;
         }
         public CD () {
@@ -586,17 +664,18 @@ namespace Assignment
 
             while (true) //Lock user into an infinite loop unless he chooses to exit
             {
-                Console.WriteLine("Currently contains:");
+                Console.WriteLine("Inventory currently contains:");
                 Console.WriteLine(mgr.GetBooksCount() + " books, " + mgr.GetCDsCount() + " CDs and " + mgr.GetDVDsCount() + " DVDs");
 
-                Console.WriteLine("What would you like to do?");
+                Console.WriteLine("\nWhat would you like to do?");
 
                 Console.WriteLine("[1] Add Media");
                 Console.WriteLine("[2] Remove Media");
                 Console.WriteLine("[3] Search");
                 Console.WriteLine("[4] List Items");
                 Console.WriteLine("[5] Get Insights");
-                Console.WriteLine("[6] Exit");
+                Console.WriteLine("[6] Update Media");
+                Console.WriteLine("[7] Exit");
 
                 Console.Write("Enter your choice: ");
 
@@ -620,6 +699,9 @@ namespace Assignment
                         mgr.GetInsights();
                         continue;
                     case 6:
+                        //mgr.UpdateMedia();
+                        continue;
+                    case 7:
                         Console.WriteLine("\nSuccessfully exited the Inventory");
                         break;
                     default:
