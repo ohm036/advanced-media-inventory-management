@@ -58,11 +58,7 @@ namespace Assignment
             return counts;
         }
 
-        //Implements all necessary functionaities for adding media to the inventory:
-        public void AddMedia () {
-
-        }
-
+        
         //Implements all necessary functionaities for removing media from the inventory:
         public void RemoveMedia() {
 
@@ -82,6 +78,25 @@ namespace Assignment
         public void GetInsights () {
 
         } 
+        
+    }
+
+    partial class Book {
+        Book () {
+            //Implements all necessary steps to initialize a book object. Using the respective constructor for this purpose to make things better.
+        }
+    }
+
+    partial class CD {
+        CD () {
+
+        }
+    }
+
+    partial class DVD {
+        DVD () {
+
+        }
     }
 
     class Driver
@@ -120,7 +135,8 @@ namespace Assignment
                 switch (choice)
                 {
                     case 1:
-                        mgr.AddMedia();
+                        Book book = new Book();
+                        mgr.Inventory.Add(book);
                         continue;
                     case 2:
                         mgr.RemoveMedia();
