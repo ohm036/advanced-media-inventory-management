@@ -123,6 +123,7 @@ namespace Assignment
                 Console.WriteLine("[8] Remove by Publisher");
                 Console.WriteLine("[9] Remove by Record Company");
                 Console.WriteLine("[10] Go back");
+                Console.WriteLine("Enter your choice:");
 
                 int choice = Convert.ToInt32(Console.ReadLine());
 
@@ -136,7 +137,7 @@ namespace Assignment
                                 Inventory.Remove(media);
                             }
                         }
-                        continue;
+                        break;
                     case 2:
                         Console.WriteLine("Enter Genre:");
                         string? genre = Console.ReadLine();
@@ -146,7 +147,7 @@ namespace Assignment
                                 Inventory.Remove(media);
                             }
                         }
-                        continue;
+                        break;
                     case 3:
                         Console.WriteLine("Enter Release Year:");
                         int releaseyear = Convert.ToInt32(Console.ReadLine());
@@ -156,7 +157,7 @@ namespace Assignment
                                 Inventory.Remove(media);
                             }
                         }
-                        continue;
+                        break;
                     case 4:
                         Console.WriteLine("Enter author's name:");
                         string? author = Console.ReadLine();
@@ -166,7 +167,7 @@ namespace Assignment
                                 Inventory.Remove(media);
                             }
                         }
-                        continue;
+                        break;
                     case 5:
                         Console.WriteLine("Enter artist's name:");
                         string? artist = Console.ReadLine();
@@ -176,7 +177,7 @@ namespace Assignment
                                 Inventory.Remove(media);
                             }
                         }
-                        continue;
+                        break;
                     case 6:
                         Console.WriteLine("Enter director's name:");
                         string? director = Console.ReadLine();
@@ -186,7 +187,7 @@ namespace Assignment
                                 Inventory.Remove(media);
                             }
                         }
-                        continue;
+                        break;
                     case 7:
                         Console.WriteLine("Enter studio's name:");
                         string? studio = Console.ReadLine();
@@ -196,7 +197,7 @@ namespace Assignment
                                 Inventory.Remove(media);
                             }
                         }
-                        continue;
+                        break;
                     case 8:
                         Console.WriteLine("Enter publisher's name:");
                         string? publisher = Console.ReadLine();
@@ -206,7 +207,7 @@ namespace Assignment
                                 Inventory.Remove(media);
                             }
                         }
-                        continue;
+                        break;
                     case 9:
                         Console.WriteLine("Enter record company's name:");
                         string? recordcompany = Console.ReadLine();
@@ -216,7 +217,7 @@ namespace Assignment
                                 Inventory.Remove(media);
                             }
                         }
-                        continue;
+                        break;
                     case 10:
                         Console.WriteLine("\nGoing back...");
                         break;
@@ -231,7 +232,50 @@ namespace Assignment
        
         //Implements all necessary functionaities for searching media from the inventory:
         public void Search () {
+            while (true) {
+                Console.WriteLine("[1] Search by Title");
+                Console.WriteLine("[2] Search by Genre");
+                Console.WriteLine("[3] Search by Release Year");
+                Console.WriteLine("[4] Search by Author");
+                Console.WriteLine("[5] Search by Artist");
+                Console.WriteLine("[6] Search by Director");
+                Console.WriteLine("[7] Search by Studio");
+                Console.WriteLine("[8] Search by Publisher");
+                Console.WriteLine("[9] Search by Record Company");
+                Console.WriteLine("[10] Go back");
+                Console.WriteLine("Enter your choice:");
 
+                int choice = Convert.ToInt32(Console.ReadLine());
+
+                switch (choice) {
+                    case 1:
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        break;
+                    case 5: 
+                        break;
+                    case 6:
+                        break;
+                    case 7:
+                        break;
+                    case 8:
+                        break;
+                    case 9:
+                        break;
+                    case 10:
+                        break;
+                    default:
+                        Console.WriteLine("Invalid choice.");
+                        continue;
+                    
+                }
+
+                break;
+            }
         }
 
         //Implements all necessary functionaities for listing media of the inventory:
