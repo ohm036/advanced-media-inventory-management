@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Globalization;
 using System.Linq;
 
 namespace Assignment
@@ -25,7 +26,8 @@ namespace Assignment
         //Apart from Title, Genre and ReleaseYear, CD also has Artist, RecordCompany and TrackList info:
         public string? Artist {get; set;}
         public string? RecordCompany {get; set;}
-        public ArrayList TrackList = new (); //This arraylist will contain all the songs that comes with a CD.
+        public static string?[] TrackList = new string?[20]; //This array will contain all the songs that comes with a CD. At most 20 songs.
+        private int numberOfSongs = TrackList.Length;
     }
 
     partial class DVD : Media <string>
@@ -102,9 +104,40 @@ namespace Assignment
     }
 
     partial class CD {
-        //Title, Genre, ReleaseYear, Artist, RecordCompany, TrackList
         public CD () {
+            Console.WriteLine("Enter the Tile: ");
+            Title = Console.ReadLine();
 
+            Console.WriteLine("Enter the Genre:");
+            Genre = Console.ReadLine();
+
+            Console.WriteLine("Enter Artist name:");
+            Artist = Console.ReadLine();
+
+            Console.WriteLine("Enter Release Year:");
+            ReleaseYear = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine("Enter the Record Company:");
+            RecordCompany = Console.ReadLine();
+
+            Console.WriteLine("How many songs does your CD have? (At most 20):");
+            numberOfSongs = Convert.ToInt32(Console.ReadLine());
+
+            for(int i = 0; i < numberOfSongs; i++) {
+                if (i == 1) {
+                    Console.WriteLine("Enter 1st song:");
+                    TrackList[i] = Console.ReadLine();
+                } else if (i == 2) {
+                    Console.WriteLine("Enter 2nd song:");
+                    TrackList[i] = Console.ReadLine();
+                } else if (i == 3) {
+                    Console.WriteLine("Enter 3rd song:");
+                    TrackList[i] = Console.ReadLine();
+                } else {
+                    Console.WriteLine("Enter " + i + "th song:");
+                    TrackList[i] = Console.ReadLine();
+                }
+            }
         }
     }
 
