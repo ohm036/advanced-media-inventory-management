@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 
@@ -60,6 +61,38 @@ namespace Assignment
             return counts;
         }
 
+        public void AddMedia () {
+            while (true) {
+                Console.WriteLine("\nWhat do you want to add?");
+                Console.WriteLine("[1] Add Book");
+                Console.WriteLine("[2] Add CD");
+                Console.WriteLine("[3] Add DVD");
+                Console.WriteLine("[4] Go Back");
+                Console.WriteLine("Enter your choice:");
+
+                int choice = Convert.ToInt32(Console.ReadLine());
+
+                switch (choice) {
+                    case 1:
+                        Book book = new();
+                        Inventory.Add(book);
+                        continue;
+                    case 2:
+                        CD cd = new();
+                        Inventory.Add(cd);
+                        continue;
+                    case 3: 
+                        DVD dvd = new();
+                        Inventory.Add(dvd);
+                        continue;
+                    case 4:
+                        break;
+                }
+
+                break;
+            }
+        }
+
         //Implements all necessary functionaities for removing media from the inventory:
         public void RemoveMedia() {
 
@@ -82,11 +115,11 @@ namespace Assignment
         
     }
 
+//Implementing all necessary steps to initialize an object. Using the respective constructors for this purpose to make things better.
     partial class Book {
         public Book () {
-            //Implements all necessary steps to initialize a book object. Using the respective constructor for this purpose to make things better.
 
-            Console.WriteLine("Enter the Tile: ");
+            Console.WriteLine("Enter the Title: ");
             Title = Console.ReadLine();
 
             Console.WriteLine("Enter the Genre:");
@@ -105,7 +138,7 @@ namespace Assignment
 
     partial class CD {
         public CD () {
-            Console.WriteLine("Enter the Tile: ");
+            Console.WriteLine("Enter the Title: ");
             Title = Console.ReadLine();
 
             Console.WriteLine("Enter the Genre:");
@@ -142,9 +175,21 @@ namespace Assignment
     }
 
     partial class DVD {
-        //Title, Genre, ReleaseYear
         public DVD () {
+            Console.WriteLine("Enter the Title: ");
+            Title = Console.ReadLine();
 
+            Console.WriteLine("Enter the Genre:");
+            Genre = Console.ReadLine();
+
+            Console.WriteLine("Enter the Director's name:");
+            Director = Console.ReadLine();
+
+            Console.WriteLine("Enter Release Year:");
+            ReleaseYear = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine("Enter the Studio:");
+            Studio = Console.ReadLine();
         }
     }
 
@@ -184,8 +229,7 @@ namespace Assignment
                 switch (choice)
                 {
                     case 1:
-                        Book book = new Book();
-                        mgr.Inventory.Add(book);
+                        mgr.AddMedia();
                         continue;
                     case 2:
                         mgr.RemoveMedia();
