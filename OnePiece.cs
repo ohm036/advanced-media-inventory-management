@@ -30,7 +30,7 @@ namespace Assignment
 
     partial class DVD : Media <string>
     {
-        //Apart from Title, Genre and ReleaseYear, CD also has Director and Studio info:
+        //Apart from Title, Genre and ReleaseYear, DVD also has Director and Studio info:
         public string? Director {get; set;}
         public string? Studio {get; set;}
 
@@ -58,7 +58,6 @@ namespace Assignment
             return counts;
         }
 
-        
         //Implements all necessary functionaities for removing media from the inventory:
         public void RemoveMedia() {
 
@@ -82,19 +81,36 @@ namespace Assignment
     }
 
     partial class Book {
-        Book () {
+        public Book () {
             //Implements all necessary steps to initialize a book object. Using the respective constructor for this purpose to make things better.
+
+            Console.WriteLine("Enter the Tile: ");
+            Title = Console.ReadLine();
+
+            Console.WriteLine("Enter the Genre:");
+            Genre = Console.ReadLine();
+
+            Console.WriteLine("Enter the Author's name:");
+            Author = Console.ReadLine();
+
+            Console.WriteLine("Enter Release Year:");
+            ReleaseYear = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine("Enter the Publisher:");
+            Publisher = Console.ReadLine();
         }
     }
 
     partial class CD {
-        CD () {
+        //Title, Genre, ReleaseYear, Artist, RecordCompany, TrackList
+        public CD () {
 
         }
     }
 
     partial class DVD {
-        DVD () {
+        //Title, Genre, ReleaseYear
+        public DVD () {
 
         }
     }
