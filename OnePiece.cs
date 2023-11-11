@@ -43,23 +43,36 @@ namespace Assignment
     class InventoryManager
     {
         //The main container of the inventory:
-        public List<Media<string>> Inventory = new List<Media<string>>();
+        public static List<Media<string>> Inventory = new List<Media<string>>();
 
-        //To keep count of different types of media present in the inventory:
-        public int[] Counter (List<Media<string>> inventory) {
-            int [] counts = new int[3] {0, 0, 0}; //Books count, CDs count, DVDs count
+        private int n_books, n_CDs, n_DVDs;
 
-            foreach (var m in inventory) {
-                if (m is Book) {
-                    counts[0] += 1;
-                } else if (m is CD) {
-                    counts[1] += 1;
-                } else if (m is DVD) {
-                    counts[2] += 1;
+        public int GetBooksCount () {
+            foreach (var media in Inventory) {
+                if (media is Book) {
+                    n_books++;
                 }
             }
 
-            return counts;
+            return n_books;
+        }
+        public int GetCDsCount () {
+            foreach (var media in Inventory) {
+                if (media is CD) {
+                    n_CDs++;
+                }
+            }
+
+            return n_CDs;
+        }
+        public int GetDVDsCount () {
+            foreach (var media in Inventory) {
+                if (media is DVD) {
+                    n_DVDs++;
+                }
+            }
+
+            return n_DVDs;
         }
 
         public void AddMedia () {
@@ -115,9 +128,10 @@ namespace Assignment
 
                 switch (choice) {
                     case 1:
-
+                        
                         continue;
                     case 2:
+                        
                         continue;
                     case 3:
                         continue;
@@ -143,50 +157,7 @@ namespace Assignment
                 break;
             }
         }
-
-        //Removing different media require different types of functionalities. So a group of remover functions under the delegate RemoverFunctions is being created:
-        private delegate void RemoverFunctions (List<Media<string>> inventory, string str);
-
-        private RemoverFunctions RemoveByTitle = (List<Media<string>> inventory, string str) => {
-
-        };
-
-        private RemoverFunctions RemoveByGenre = (List<Media<string>> inventory, string str) => {
-            
-        };
-
-        private RemoverFunctions RemoveByReleaseYear = (List<Media<string>> inventory, string str) => {
-            
-        };
-
-        private RemoverFunctions RemoveByAuthor = (List<Media<string>> inventory, string str) => {
-            
-        };
-
-        private RemoverFunctions RemoveByArtist = (List<Media<string>> inventory, string str) => {
-            
-        };
-
-        private RemoverFunctions RemoveByDirector = (List<Media<string>> inventory, string str) => {
-            
-        };
-
-        private RemoverFunctions RemoveByStudio = (List<Media<string>> inventory, string str) => {
-            
-        };
-
-        private RemoverFunctions RemoveByRecordCompany = (List<Media<string>> inventory, string str) => {
-            
-        };
-
-        private RemoverFunctions RemoveByPublisher = (List<Media<string>> inventory, string str) => {
-            
-        };
-
-        private void Remover (List <Media <string>> inventory, RemoverFunctions rf) {
-            if (rf is RemoveByTitle)
-        }
-
+       
         //Implements all necessary functionaities for searching media from the inventory:
         public void Search () {
 
@@ -300,7 +271,7 @@ namespace Assignment
             while (true) //Lock user into an infinite loop unless he chooses to exit
             {
                 Console.WriteLine("Currently contains:");
-                Console.WriteLine(mgr.Counter(mgr.Inventory)[0] + " books, " + mgr.Counter(mgr.Inventory)[1] + " CDs and " + mgr.Counter(mgr.Inventory)[2] + " DVDs");
+                Console.WriteLine(mgr.GetBooksCount() + " books, " + mgr.GetCDsCount() + " CDs and " + mgr.GetDVDsCount() + " DVDs");
 
                 Console.WriteLine("What would you like to do?");
 
