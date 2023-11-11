@@ -3,6 +3,7 @@ using System.Collections;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
+using Microsoft.VisualBasic;
 
 namespace Assignment
 {
@@ -87,6 +88,9 @@ namespace Assignment
                         continue;
                     case 4:
                         break;
+                    default:
+                        Console.WriteLine("Invalid choice.");
+                        continue;
                 }
 
                 break;
@@ -95,7 +99,92 @@ namespace Assignment
 
         //Implements all necessary functionaities for removing media from the inventory:
         public void RemoveMedia() {
+            while (true) {
+                Console.WriteLine("[1] Remove by Title");
+                Console.WriteLine("[2] Remove by Genre");
+                Console.WriteLine("[3] Remove by Release Year");
+                Console.WriteLine("[4] Remove by Author");
+                Console.WriteLine("[5] Remove by Artist");
+                Console.WriteLine("[6] Remove by Director");
+                Console.WriteLine("[7] Remove by Studio");
+                Console.WriteLine("[8] Remove by Publisher");
+                Console.WriteLine("[9] Remove by Record Company");
+                Console.WriteLine("[10] Go back");
 
+                int choice = Convert.ToInt32(Console.ReadLine());
+
+                switch (choice) {
+                    case 1:
+
+                        continue;
+                    case 2:
+                        continue;
+                    case 3:
+                        continue;
+                    case 4:
+                        continue;
+                    case 5:
+                        continue;
+                    case 6:
+                        continue;
+                    case 7:
+                        continue;
+                    case 8:
+                        continue;
+                    case 9:
+                        continue;
+                    case 10:
+                        break;
+                    default:
+                        Console.WriteLine("Invalid choice.");
+                        continue;
+                }
+
+                break;
+            }
+        }
+
+        //Removing different media require different types of functionalities. So a group of remover functions under the delegate RemoverFunctions is being created:
+        private delegate void RemoverFunctions (List<Media<string>> inventory, string str);
+
+        private RemoverFunctions RemoveByTitle = (List<Media<string>> inventory, string str) => {
+
+        };
+
+        private RemoverFunctions RemoveByGenre = (List<Media<string>> inventory, string str) => {
+            
+        };
+
+        private RemoverFunctions RemoveByReleaseYear = (List<Media<string>> inventory, string str) => {
+            
+        };
+
+        private RemoverFunctions RemoveByAuthor = (List<Media<string>> inventory, string str) => {
+            
+        };
+
+        private RemoverFunctions RemoveByArtist = (List<Media<string>> inventory, string str) => {
+            
+        };
+
+        private RemoverFunctions RemoveByDirector = (List<Media<string>> inventory, string str) => {
+            
+        };
+
+        private RemoverFunctions RemoveByStudio = (List<Media<string>> inventory, string str) => {
+            
+        };
+
+        private RemoverFunctions RemoveByRecordCompany = (List<Media<string>> inventory, string str) => {
+            
+        };
+
+        private RemoverFunctions RemoveByPublisher = (List<Media<string>> inventory, string str) => {
+            
+        };
+
+        private void Remover (List <Media <string>> inventory, RemoverFunctions rf) {
+            if (rf is RemoveByTitle)
         }
 
         //Implements all necessary functionaities for searching media from the inventory:
@@ -246,6 +335,9 @@ namespace Assignment
                     case 6:
                         Console.WriteLine("\nSuccessfully exited the Inventory");
                         break;
+                    default:
+                        Console.WriteLine("Invalid choice.");
+                        continue;
                 }
 
                 break;
