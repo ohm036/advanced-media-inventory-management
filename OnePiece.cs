@@ -43,7 +43,29 @@ namespace Assignment
     class InventoryManager
     {
         //The main container of the inventory:
-        public static List<Media<string>> Inventory = new List<Media<string>>();
+        public static List<Media<string>> Inventory = new List<Media<string>>
+        {
+            // Books
+            new Book("To Kill a Mockingbird", "Fiction", "Harper Lee", 1960, "J.B. Lippincott & Co."),
+            new Book("1984", "Dystopian Fiction", "George Orwell", 1949, "Secker & Warburg"),
+            new Book("The Great Gatsby", "Classic", "F. Scott Fitzgerald", 1925, "Charles Scribner's Sons"),
+            new Book("One Hundred Years of Solitude", "Magical Realism", "Gabriel Garcia Marquez", 1967, "Harper & Row"),
+            new Book("The Catcher in the Rye", "Coming-of-Age", "J.D. Salinger", 1951, "Little, Brown and Company"),
+
+            //CDs
+            new CD("Thriller", "Pop", "Michael Jackson", 1982, "Epic", new string?[] { "Thriller", "Beat It", "Billie Jean", "Wanna Be Startin' Somethin'", "The Girl Is Mine" }),
+            new CD("Abbey Road", "Rock", "The Beatles", 1969, "Apple", new string?[] { "Come Together", "Something", "Here Comes the Sun", "Octopus's Garden", "I Want You (She's So Heavy)" }),
+            new CD("The Dark Side of the Moon", "Progressive Rock", "Pink Floyd", 1973, "Harvest", new string?[] { "Speak to Me", "Breathe", "Time", "Money", "Us and Them" }),
+            new CD("Rumours", "Soft Rock", "Fleetwood Mac", 1977, "Warner Bros.", new string?[] { "Go Your Own Way", "Dreams", "Don't Stop", "The Chain", "Gold Dust Woman" }),
+            new CD("Back in Black", "Hard Rock", "AC/DC", 1980, "Albert", new string?[] { "Hells Bells", "Back in Black", "You Shook Me All Night Long", "Rock and Roll Ain't Noise Pollution", "Shoot to Thrill" }),
+
+            // DVDs
+            new DVD("The Shawshank Redemption", "Drama", "Frank Darabont", 1994, "Castle Rock Entertainment"),
+            new DVD("Inception", "Sci-Fi Action", "Christopher Nolan", 2010, "Syncopy"),
+            new DVD("Pulp Fiction", "Crime", "Quentin Tarantino", 1994, "Miramax Films"),
+            new DVD("The Matrix", "Sci-Fi Action", "Lana and Lilly Wachowski", 1999, "Warner Bros."),
+            new DVD("Forrest Gump", "Drama", "Robert Zemeckis", 1994, "Paramount Pictures"),
+        };
 
         private int n_books, n_CDs, n_DVDs;
 
@@ -292,6 +314,14 @@ namespace Assignment
 
 //Implementing all necessary steps to initialize an object. Using the respective constructors for this purpose to make things better.
     partial class Book {
+
+        public Book (string? titl, string? gen, string? auth, int release, string? pub) {
+            Title = titl;
+            Genre = gen;
+            Author = auth;
+            ReleaseYear = release;
+            Publisher = pub;
+        }
         public Book () {
 
             Console.WriteLine("Enter the Title: ");
@@ -312,6 +342,14 @@ namespace Assignment
     }
 
     partial class CD {
+
+        public CD (string? titl, string? gen, string? artt, int release, string? company, string? [] tracklist) {
+            Title = titl;
+            Genre = gen;
+            Artist = artt;
+            ReleaseYear = release;
+            TrackList = tracklist;
+        }
         public CD () {
             Console.WriteLine("Enter the Title: ");
             Title = Console.ReadLine();
@@ -350,6 +388,14 @@ namespace Assignment
     }
 
     partial class DVD {
+
+        public DVD (string? titl, string? gen, string? dir, int release, string? std) {
+            Title = titl;
+            Genre = gen;
+            Director = dir;
+            ReleaseYear = release;
+            Studio = std;
+        }
         public DVD () {
             Console.WriteLine("Enter the Title: ");
             Title = Console.ReadLine();
