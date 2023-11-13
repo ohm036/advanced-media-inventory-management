@@ -10,3 +10,4 @@ build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Advanced_Media_Inventory_Management
 build_property.ProjectDir = D:\Code Files\C#\advanced-media-inventory-management\
 build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 

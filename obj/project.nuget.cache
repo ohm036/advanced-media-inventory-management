@@ -1,13 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "1JgK6xIogJY8qQyVd2ciUHclhKZxOtZ7be+OYCncZOPfPWZTkRxtbsveZnxW6lAPK3vmdax3cj5ge5fxCDmRrw==",
+  "dgSpecHash": "SIDpk7Ex0HMDrj4hXniatgTwOqm51kEavhJLPBK9izC+gf9k+spgEWsJlNBYgjIIrdqXKMwNi8zMAS+rflJK9Q==",
   "success": true,
   "projectFilePath": "D:\\Code Files\\C#\\advanced-media-inventory-management\\Advanced Media Inventory Management.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\omarh\\.nuget\\packages\\microsoft.netcore.app.ref\\7.0.8\\microsoft.netcore.app.ref.7.0.8.nupkg.sha512",
-    "C:\\Users\\omarh\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\7.0.8\\microsoft.windowsdesktop.app.ref.7.0.8.nupkg.sha512",
-    "C:\\Users\\omarh\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\7.0.8\\microsoft.aspnetcore.app.ref.7.0.8.nupkg.sha512",
-    "C:\\Users\\omarh\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\7.0.8\\microsoft.netcore.app.host.win-x64.7.0.8.nupkg.sha512"
+    "C:\\Users\\Omar Ibne Alam\\.nuget\\packages\\microsoft.netcore.app.ref\\7.0.12\\microsoft.netcore.app.ref.7.0.12.nupkg.sha512",
+    "C:\\Users\\Omar Ibne Alam\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\7.0.12\\microsoft.windowsdesktop.app.ref.7.0.12.nupkg.sha512",
+    "C:\\Users\\Omar Ibne Alam\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\7.0.12\\microsoft.aspnetcore.app.ref.7.0.12.nupkg.sha512",
+    "C:\\Users\\Omar Ibne Alam\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\7.0.12\\microsoft.netcore.app.host.win-x64.7.0.12.nupkg.sha512"
   ],
   "logs": []
 }

@@ -10,23 +10,16 @@
         "projectUniqueName": "D:\\Code Files\\C#\\advanced-media-inventory-management\\Advanced Media Inventory Management.csproj",
         "projectName": "Advanced Media Inventory Management",
         "projectPath": "D:\\Code Files\\C#\\advanced-media-inventory-management\\Advanced Media Inventory Management.csproj",
-        "packagesPath": "C:\\Users\\omarh\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\Omar Ibne Alam\\.nuget\\packages\\",
         "outputPath": "D:\\Code Files\\C#\\advanced-media-inventory-management\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\omarh\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Omar Ibne Alam\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -39,9 +32,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "default"
         }
       },
       "frameworks": {
@@ -61,19 +51,19 @@
           "downloadDependencies": [
             {
               "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[7.0.8, 7.0.8]"
+              "version": "[7.0.12, 7.0.12]"
             },
             {
               "name": "Microsoft.NETCore.App.Host.win-x64",
-              "version": "[7.0.8, 7.0.8]"
+              "version": "[7.0.12, 7.0.12]"
             },
             {
               "name": "Microsoft.NETCore.App.Ref",
-              "version": "[7.0.8, 7.0.8]"
+              "version": "[7.0.12, 7.0.12]"
             },
             {
               "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[7.0.8, 7.0.8]"
+              "version": "[7.0.12, 7.0.12]"
             }
           ],
           "frameworkReferences": {
@@ -81,7 +71,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100-preview.6.23330.14\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100-rc.2.23502.2\\RuntimeIdentifierGraph.json"
         }
       }
     }

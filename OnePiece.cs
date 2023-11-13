@@ -51,6 +51,12 @@ namespace Assignment
             new Book("The Great Gatsby", "Classic", "F. Scott Fitzgerald", 1925, "Charles Scribner's Sons"),
             new Book("One Hundred Years of Solitude", "Magical Realism", "Gabriel Garcia Marquez", 1967, "Harper & Row"),
             new Book("The Catcher in the Rye", "Coming-of-Age", "J.D. Salinger", 1951, "Little, Brown and Company"),
+            new Book("Gulliver's Travels", "Adventure", "Jonathan Swift", 1726, "Unknown"),
+            new Book("Twenty Thousand Leagues Under the Sea", "Adventure", "Jules Verne", 1870, "Pierre-Jules Hetzel"),
+            new Book("Around the World in Eighty Days", "Adventure", "Jules Verne", 1873, "Pierre-Jules Hetzel"),
+            new Book("The Adventures of Tintin: The Secret of the Unicorn", "Adventure", "Hergé", 1943, "Casterman"),
+            new Book("The Hound of the Baskervilles", "Mystery", "Arthur Conan Doyle", 1902, "George Newnes"),
+            new Book("A Study in Scarlet", "Mystery", "Arthur Conan Doyle", 1887, "Ward, Lock & Co."),
 
             //CDs
             new CD("Thriller", "Pop", "Michael Jackson", 1982, "Epic", new string?[] { "Thriller", "Beat It", "Billie Jean", "Wanna Be Startin' Somethin'", "The Girl Is Mine" }),
@@ -58,6 +64,11 @@ namespace Assignment
             new CD("The Dark Side of the Moon", "Progressive Rock", "Pink Floyd", 1973, "Harvest", new string?[] { "Speak to Me", "Breathe", "Time", "Money", "Us and Them" }),
             new CD("Rumours", "Soft Rock", "Fleetwood Mac", 1977, "Warner Bros.", new string?[] { "Go Your Own Way", "Dreams", "Don't Stop", "The Chain", "Gold Dust Woman" }),
             new CD("Back in Black", "Hard Rock", "AC/DC", 1980, "Albert", new string?[] { "Hells Bells", "Back in Black", "You Shook Me All Night Long", "Rock and Roll Ain't Noise Pollution", "Shoot to Thrill" }),
+            new CD("Starboy", "R&B", "The Weeknd", 2016, "Republic Records", new string?[] { "Starboy", "Party Monster", "I Feel It Coming", "Reminder", "Secrets" }),
+            new CD("After Hours", "R&B", "The Weeknd", 2020, "Republic Records", new string?[] { "Blinding Lights", "Save Your Tears", "In Your Eyes", "After Hours", "Heartless" }),
+            new CD("The Slim Shady LP", "Hip Hop", "Eminem", 1999, "Aftermath", new string?[] { "My Name Is", "Guilty Conscience", "Role Model", "Just Don't Give a Fuck", "Rock Bottom" }),
+            new CD("The Marshall Mathers LP", "Hip Hop", "Eminem", 2000, "Aftermath", new string?[] { "The Real Slim Shady", "Stan", "The Way I Am", "Bitch Please II", "Criminal" }),
+            new CD("The Eminem Show", "Hip Hop", "Eminem", 2002, "Aftermath", new string?[] { "Without Me", "Cleanin' Out My Closet", "Sing for the Moment", "Superman", "Business" }),
 
             // DVDs
             new DVD("The Shawshank Redemption", "Drama", "Frank Darabont", 1994, "Castle Rock Entertainment"),
@@ -65,6 +76,17 @@ namespace Assignment
             new DVD("Pulp Fiction", "Crime", "Quentin Tarantino", 1994, "Miramax Films"),
             new DVD("The Matrix", "Sci-Fi Action", "Lana and Lilly Wachowski", 1999, "Warner Bros."),
             new DVD("Forrest Gump", "Drama", "Robert Zemeckis", 1994, "Paramount Pictures"),
+            new DVD("Fifty Shades of Grey", "Romance", "Sam Taylor-Johnson", 2015, "Focus Features"),
+            new DVD("Fifty Shades Darker", "Romance", "James Foley", 2017, "Universal Pictures"),
+            new DVD("Fifty Shades Freed", "Romance", "James Foley", 2018, "Universal Pictures"),
+            new DVD("Batman Begins", "Action", "Christopher Nolan", 2005, "Warner Bros."),
+            new DVD("The Dark Knight", "Action", "Christopher Nolan", 2008, "Warner Bros."),
+            new DVD("The Dark Knight Rises", "Action", "Christopher Nolan", 2012, "Warner Bros."),
+            new DVD("Interstellar", "Sci-Fi", "Christopher Nolan", 2014, "Syncopy"),
+            new DVD("Dunkirk", "War", "Christopher Nolan", 2017, "Syncopy"),
+            new DVD("The Prestige", "Drama", "Christopher Nolan", 2006, "Syncopy"),
+
+            
         };
 
         private int n_books, n_CDs, n_DVDs;
