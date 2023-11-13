@@ -697,7 +697,26 @@ namespace Assignment
 
                                         break;
                                     case 6:
-                                        //To implement
+                                        while (true) {
+                                            Console.WriteLine("[1] Change single track");
+                                            Console.WriteLine("[2] Add a new tracklist");
+                                            Console.WriteLine("[3] Enter your choice: ");
+
+                                            int trChoice = Convert.ToInt32(Console.ReadLine());
+
+                                            switch (trChoice) {
+                                                case 1:
+                                                    Console.WriteLine("\nDisplaying list of current tracks:");
+
+                                                    foreach (var track in cd.Tra)
+                                                    break;
+                                                case 2:
+                                                    break;
+                                                default:
+                                                    Console.WriteLine("Invalid choice!");
+                                                    continue;
+                                            }
+                                        }
                                     default:
                                         Console.WriteLine("Invalid choice!");
                                         continue;
