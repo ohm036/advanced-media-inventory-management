@@ -501,7 +501,7 @@ namespace Assignment
 
         //Implements all necessary functionaities for listing media of the inventory:
         public void ListItems () {
-            Console.WriteLine("Showing all items in the inventory:");
+            Console.WriteLine("\nShowing all items in the inventory:");
 
             for (int i = 0; i < 70; i++) {
                 Console.Write("-");
@@ -525,7 +525,7 @@ namespace Assignment
         } 
 
         //Implements all necessary functionaities to update a media of the inventory. We will only allow the user to search by title and update it. But here's the catch:
-        
+
         //There can be several media that may match with user input. So, we will use a list of matches and let the user choose from that list to update any item:
         public void UpdateMedia()
         {
@@ -539,55 +539,114 @@ namespace Assignment
 
             if (ToUpdate.Count == 0)
             {
-                Console.WriteLine("Media not found.");
-                return;
-            }
+                Console.WriteLine("No results found!");
+            } else {
+                while (true) {
+                    Console.WriteLine($"Following matches found:");
+                    ShowMatches(ToUpdate);
 
-            Console.WriteLine($"Found the following matches with '{UTitle}':");
-            ShowMatches(ToUpdate);
+                    Console.WriteLine("Which media do you want to update?\n");
 
-            Console.WriteLine("Which property do you want to update?");
-            Console.WriteLine("[1] Title");
-            Console.WriteLine("[2] Genre");
-            Console.WriteLine("[3] Release Year");
+                    int index = 1;
 
-            if (ToUpdate.First() is Book)
-            {
-                Console.WriteLine("[4] Author");
-                Console.WriteLine("[5] Publisher");
-            }
-            else if (ToUpdate.First() is CD)
-            {
-                Console.WriteLine("[4] Artist");
-                Console.WriteLine("[5] Record Company");
-            }
-            else if (ToUpdate.First() is DVD)
-            {
-                Console.WriteLine("[4] Director");
-                Console.WriteLine("[5] Studio");
-            }
-
-            Console.WriteLine("[6] Go back");
-
-            Console.Write("Enter your choice: ");
-            int choice = Convert.ToInt32(Console.ReadLine());
-
-            switch (choice)
-            {
-                case 1:
-                    Console.WriteLine("Enter the new title:");
-                    string? NewTitle = Console.ReadLine();
-                    foreach (var media in ToUpdate)
-                    {
-                        media.Title = NewTitle;
+                    foreach (var media in ToUpdate) {
+                        Console.WriteLine($"[{index}] {media.Title}");
+                        index++;
                     }
+
+                    Console.WriteLine("Enter your choice (Type -1 to go back):");
+
+                    int choice = Convert.ToInt32(Console.ReadLine());
+
+                    //Make sure the user selects a valid choice:
+                    if (choice > 0 && choice <= ToUpdate.Count) {
+
+                        if (ToUpdate[choice - 1] /*Indexing works from 0. But user was shown options starting from 1.Thus subtracting 1 from choice to grab the right media from the list*/ is Book b) {
+                            while (true) {
+                                Console.WriteLine($"Which property of the book \"{b.Title}\" you want to update?");
+                                Console.WriteLine("[1] Title");
+                                Console.WriteLine("[2] Genre");
+                                Console.WriteLine("[3] Author");
+                                Console.WriteLine("[4] Release Year");
+                                Console.WriteLine("[5] Publisher");
+                                Console.WriteLine("Enter your choice:");
+
+                                int propChoice = Convert.ToInt32(Console.ReadLine());
+
+                                switch (propChoice) {
+                                    case 1:
+                                        Console.WriteLine("Enter new title:");
+                                        string? NewTitl = Console.ReadLine();
+
+                                        int IndexOfBookToUpdateInfo = Inventory.FindIndex(media => media.Title == b.Title);
+
+                                        Inventory[IndexOfBookToUpdateInfo].Title = NewTitl;
+                                        Console.WriteLine("Title updated successfully");
+
+                                        break;
+                                    case 2:
+                                        Console.WriteLine("Enter new genre:");
+                                        string? NewGen = Console.ReadLine();
+
+                                        IndexOfBookToUpdateInfo = Inventory.FindIndex(media => media.Genre == b.Genre);
+
+                                        Inventory[IndexOfBookToUpdateInfo].Genre = NewGen;
+                                        Console.WriteLine("Genre updated successfully");
+
+                                        break;
+                                    case 3:
+                                        Console.WriteLine("Enter new author's name:");
+                                        string? NewAuth = Console.ReadLine();
+
+                                        IndexOfBookToUpdateInfo = Inventory.FindIndex(media => media is Book && ((Book)media).Author == b.Author);
+
+                                        ((Book)Inventory[IndexOfBookToUpdateInfo]).Author = NewAuth;
+                                        Console.WriteLine("Author updated successfully");
+
+                                        break;
+                                    case 4:
+                                        Console.WriteLine("Enter new release year:");
+                                        int NewRY = Convert.ToInt32(Console.ReadLine());
+
+                                        IndexOfBookToUpdateInfo = Inventory.FindIndex(media => media.ReleaseYear == b.ReleaseYear);
+
+                                        Inventory[IndexOfBookToUpdateInfo].ReleaseYear = NewRY;
+                                        Console.WriteLine("Release year updated successfully");
+                                        
+                                        break;
+                                    case 5:
+                                        Console.WriteLine("Enter new publisher's name:");
+                                        string? NewPub = Console.ReadLine();
+
+                                        IndexOfBookToUpdateInfo = Inventory.FindIndex(media => media is Book && ((Book)media).Publisher == b.Publisher);
+
+                                        ((Book)Inventory[IndexOfBookToUpdateInfo]).Publisher = NewPub;
+                                        Console.WriteLine("Publisher updated successfully");
+
+                                        break;
+                                    default:
+                                        Console.WriteLine("Invalid choice!");
+                                        continue;
+                                }
+
+                                break;
+                            }
+                        } else if (ToUpdate[choice - 1] is CD cd) {
+
+                        } else if (ToUpdate[choice - 1] is DVD dvd) {
+
+                        }
+
+                        Console.WriteLine("\nMedia updated successfully!");
+                    } else if (choice == -1) {
+                        Console.WriteLine("\nGoing back...");
+                    } else {
+                        Console.WriteLine("Invalid choice!");
+                        continue; //Loop again.
+                    }
+
                     break;
-                case 6:
-                    Console.WriteLine("\nGoing back...");
-                    break;
-                default:
-                    Console.WriteLine("Invalid choice.");
-                    break;
+                }
             }
         }
     }
@@ -712,7 +771,7 @@ namespace Assignment
 
             while (true) //Lock user into an infinite loop unless he chooses to exit
             {
-                Console.WriteLine("Inventory currently contains:");
+                Console.WriteLine("\nInventory currently contains:");
                 Console.WriteLine(mgr.GetBooksCount() + " books, " + mgr.GetCDsCount() + " CDs and " + mgr.GetDVDsCount() + " DVDs"); //Always show the state of the inventory.
 
                 Console.WriteLine("\nWhat would you like to do?");
@@ -747,7 +806,7 @@ namespace Assignment
                         mgr.GetInsights();
                         continue;
                     case 6:
-                        //mgr.UpdateMedia();
+                        mgr.UpdateMedia();
                         continue;
                     case 7:
                         Console.WriteLine("\nSuccessfully exited the Inventory");
