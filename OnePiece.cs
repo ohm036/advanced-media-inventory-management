@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Data;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
@@ -28,8 +29,6 @@ namespace Assignment
         //Apart from Title, Genre and ReleaseYear, CD also has Artist, RecordCompany and TrackList info:
         public string? Artist {get; set;}
         public string? RecordCompany {get; set;}
-        public static string?[] TrackList = new string?[20]; //This array will contain all the songs that comes with a CD. At most 20 songs.
-        private int numberOfSongs = TrackList.Length;
     }
 
     partial class DVD : Media <string>
@@ -698,25 +697,89 @@ namespace Assignment
                                         break;
                                     case 6:
                                         while (true) {
+                                            Console.WriteLine("Showing current tracks:");
+                                            cd.ShowTrackList();
+                                            
+                                            Console.WriteLine("\nWhat changes you want to make?");
                                             Console.WriteLine("[1] Change single track");
                                             Console.WriteLine("[2] Add a new tracklist");
-                                            Console.WriteLine("[3] Enter your choice: ");
+                                            Console.WriteLine("Enter your choice: ");
 
-                                            int trChoice = Convert.ToInt32(Console.ReadLine());
+                                            int ChangingChoice = Convert.ToInt32(Console.ReadLine());
 
-                                            switch (trChoice) {
+                                            switch (ChangingChoice) {
                                                 case 1:
-                                                    Console.WriteLine("\nDisplaying list of current tracks:");
+                                                    while (true) {
+                                                        Console.WriteLine("Which song do you want to change?");
+                                                        Console.WriteLine("Enter your choice:");
 
-                                                    foreach (var track in cd.Tra)
+                                                        int TrackChoice = Convert.ToInt32(Console.ReadLine());
+
+                                                        if (TrackChoice >= 1 && TrackChoice <= cd.numberOfSongs) {
+                                                            Console.WriteLine("Enter new track:");
+                                                            string? NewTrack = Console.ReadLine();
+
+                                                            cd.UpdateSingleTrack(TrackChoice - 1, NewTrack);
+                                                            //TrackChoice starts from 1. But the TrackList indexing starts from 0. So sending the parameter with 1 less.
+
+                                                            break;
+                                                        } else {
+                                                            Console.WriteLine("Invalid song choice");
+                                                            continue;
+                                                        }
+                                                    }
+
                                                     break;
                                                 case 2:
+                                                    int NewNumberOfSongs;
+
+                                                    while (true) {
+                                                        Console.WriteLine("How many songs you want to add? (At most 20)");
+
+                                                        NewNumberOfSongs = Convert.ToInt32(Console.ReadLine());
+
+                                                        if (NewNumberOfSongs > 0 && NewNumberOfSongs <= 20) {
+                                                            break;
+                                                        } else if (NewNumberOfSongs == 0) {
+                                                            Console.WriteLine("Tracklist cannot be empty!");
+                                                            continue;
+                                                        } else {
+                                                            Console.WriteLine("Number of tracks invalid. Enter again.");
+                                                            continue;
+                                                        }
+                                                    }
+
+                                                    string?[] NewList = new string?[20];
+
+                                                    for (int i = 1; i <= NewNumberOfSongs; i++) {
+                                                        if (i == 1) {
+                                                            Console.WriteLine("Enter 1st song:");
+                                                            NewList[0] = Console.ReadLine();
+                                                        } else if (i == 2) {
+                                                            Console.WriteLine("Enter 2nd song:");
+                                                            NewList[1] = Console.ReadLine();
+                                                        } else if (i == 3) {
+                                                            Console.WriteLine("Enter 3rd song:");
+                                                            NewList[2] = Console.ReadLine();
+                                                        } else {
+                                                            Console.WriteLine("Enter " + i + "th song:");
+                                                            NewList[i-1] = Console.ReadLine();
+                                                        }
+                                                    }
+
+                                                    cd.AddNewTrackList(NewList, NewNumberOfSongs);
+
                                                     break;
                                                 default:
-                                                    Console.WriteLine("Invalid choice!");
+                                                    Console.WriteLine("Invalid choice.");
                                                     continue;
                                             }
+
+                                            break;
+                                            
                                         }
+
+                                        break;
                                     default:
                                         Console.WriteLine("Invalid choice!");
                                         continue;
@@ -804,6 +867,29 @@ namespace Assignment
                     break;
                 }
             }
+        }
+    }
+
+    partial class CD { //With tracklist functionality
+        private static string?[] TrackList = new string?[20]; //This array will contain all the songs that comes with a CD. At most 20 songs.
+        public int numberOfSongs = TrackList.Length;
+        public void ShowTrackList () { //Displays a list of existing songs in the CD
+            for (int i = 0; i < numberOfSongs; i++) {
+                Console.WriteLine($"[{i + 1}] {TrackList[i]}");
+            }
+        }
+
+        public void UpdateSingleTrack (int index, string? NewTrack) {
+            TrackList[index] = NewTrack;
+            Console.WriteLine("Track updated! Showing updated list:");
+            ShowTrackList();
+        }
+
+        public void AddNewTrackList (string?[] NewTrackList, int NewNumberOfSongs) {
+            TrackList = NewTrackList;
+            numberOfSongs = NewNumberOfSongs;
+            Console.WriteLine("Tracklist added! Showing new list:");
+            ShowTrackList();
         }
     }
 
