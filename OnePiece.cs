@@ -13,17 +13,7 @@ namespace Assignment
         //Common attributes are Title, Genre, ReleaseYear
         public T? Title {get; set;}
         public T? Genre {get; set;}
-        public int ReleaseYear {
-            get {
-                return ReleaseYear;
-            }
-            
-            set {
-                if (value <= 0) {
-                    throw new ArgumentOutOfRangeException("Release year", "Release year cannot be zero or negative"); //According to 4th overload of ArgumentOutOfRangeException constructor overload.
-                }
-            }
-        }
+        public int ReleaseYear {get; set;}
     }
 
     partial class Book : Media <string>
@@ -209,8 +199,11 @@ namespace Assignment
                             foreach (var media in Inventory) {
                                 if (media.Title == title) {
                                     Inventory.Remove(media);
+                                    Console.WriteLine($"{media.Title} removed");
+                                    break;
                                 }
                             }
+                            
                             break;
                         case 2:
                             Console.WriteLine("Enter Genre:");
@@ -219,6 +212,8 @@ namespace Assignment
                             foreach (var media in Inventory) {
                                 if (media.Genre == genre) {
                                     Inventory.Remove(media);
+                                    Console.WriteLine($"All media of genre: {media.Genre} removed");
+                                    break;
                                 }
                             }
                             break;
@@ -229,6 +224,8 @@ namespace Assignment
                             foreach (var media in Inventory) {
                                 if (media.ReleaseYear == releaseyear) {
                                     Inventory.Remove(media);
+                                    Console.WriteLine($"All {media.ReleaseYear} media removed");
+                                    break;
                                 }
                             }
                             break;
@@ -237,8 +234,10 @@ namespace Assignment
                             string? author = Console.ReadLine();
 
                             foreach (var media in Inventory) {
-                                if (media is Book && (((Book)media).Author) == author) {
+                                if (media is Book b && ((Book)media).Author == author) {
                                     Inventory.Remove(media);
+                                    Console.WriteLine($"Author {b.Author} removed");
+                                    break;
                                 }
                             }
                             break;
@@ -247,8 +246,10 @@ namespace Assignment
                             string? artist = Console.ReadLine();
 
                             foreach (var media in Inventory) {
-                                if (media is CD && (((CD)media).Artist) == artist) {
+                                if (media is CD c && ((CD)media).Artist == artist) {
                                     Inventory.Remove(media);
+                                    Console.WriteLine($"Artist {c.Artist} removed");
+                                    break;
                                 }
                             }
                             break;
@@ -257,8 +258,10 @@ namespace Assignment
                             string? director = Console.ReadLine();
 
                             foreach (var media in Inventory) {
-                                if (media is DVD && (((DVD)media).Director) == director) {
+                                if (media is DVD d && ((DVD)media).Director == director) {
                                     Inventory.Remove(media);
+                                    Console.WriteLine($"Director {d.Director} removed");
+                                    break;
                                 }
                             }
                             break;
@@ -268,8 +271,10 @@ namespace Assignment
 
                             foreach (var media in Inventory) {
                                 //It is needed for the media to be a DVD in order to have a studio attribute. Then type casting has been used
-                                if (media is DVD && (((DVD)media).Studio) == studio) {
+                                if (media is DVD d && ((DVD)media).Studio == studio) {
                                     Inventory.Remove(media);
+                                    Console.WriteLine($"Studio {d.Studio} removed");
+                                    break;
                                 }
                             }
                             break;
@@ -278,8 +283,10 @@ namespace Assignment
                             string? publisher = Console.ReadLine();
 
                             foreach (var media in Inventory) {
-                                if (media is Book && (((Book)media).Publisher) == publisher) {
+                                if (media is Book b && ((Book)media).Publisher == publisher) {
                                     Inventory.Remove(media);
+                                    Console.WriteLine($"Publisher {b.Publisher} removed");
+                                    break;
                                 }
                             }
                             break;
@@ -288,8 +295,10 @@ namespace Assignment
                             string? recordcompany = Console.ReadLine();
 
                             foreach (var media in Inventory) {
-                                if (media is CD && (((CD)media).RecordCompany) == recordcompany) {
+                                if (media is CD c && ((CD)media).RecordCompany == recordcompany) {
                                     Inventory.Remove(media);
+                                    Console.WriteLine($"{c.RecordCompany} removed");
+                                    break;
                                 }
                             }
                             break;
@@ -1052,20 +1061,24 @@ namespace Assignment
             Studio = std;
         }
         public DVD () {
-            Console.WriteLine("Enter the Title: ");
-            Title = Console.ReadLine();
+            try {
+                Console.WriteLine("Enter the Title: ");
+                Title = Console.ReadLine();
 
-            Console.WriteLine("Enter the Genre:");
-            Genre = Console.ReadLine();
+                Console.WriteLine("Enter the Genre:");
+                Genre = Console.ReadLine();
 
-            Console.WriteLine("Enter the Director's name:");
-            Director = Console.ReadLine();
+                Console.WriteLine("Enter the Director's name:");
+                Director = Console.ReadLine();
 
-            Console.WriteLine("Enter Release Year:");
-            ReleaseYear = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("Enter Release Year:");
+                ReleaseYear = Convert.ToInt32(Console.ReadLine());
 
-            Console.WriteLine("Enter the Studio:");
-            Studio = Console.ReadLine();
+                Console.WriteLine("Enter the Studio:");
+                Studio = Console.ReadLine();
+            } catch (Exception e) {
+                Console.WriteLine(e.Message);
+            }
         }
     }
 
