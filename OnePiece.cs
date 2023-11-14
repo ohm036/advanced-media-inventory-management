@@ -13,7 +13,17 @@ namespace Assignment
         //Common attributes are Title, Genre, ReleaseYear
         public T? Title {get; set;}
         public T? Genre {get; set;}
-        public int ReleaseYear {get; set;}
+        public int ReleaseYear {
+            get {
+                return ReleaseYear;
+            }
+            
+            set {
+                if (value <= 0) {
+                    throw new ArgumentOutOfRangeException("Release year", "Release year cannot be zero or negative"); //According to 4th overload of ArgumentOutOfRangeException constructor overload.
+                }
+            }
+        }
     }
 
     partial class Book : Media <string>
@@ -131,342 +141,383 @@ namespace Assignment
 
         public void AddMedia () {
             while (true) {
-                Console.WriteLine("\nWhat do you want to add?");
-                Console.WriteLine("[1] Add Book");
-                Console.WriteLine("[2] Add CD");
-                Console.WriteLine("[3] Add DVD");
-                Console.WriteLine("[4] Go Back");
-                Console.WriteLine("Enter your choice:");
+                try {
+                    Console.WriteLine("\nWhat do you want to add?");
+                    Console.WriteLine("[1] Add Book");
+                    Console.WriteLine("[2] Add CD");
+                    Console.WriteLine("[3] Add DVD");
+                    Console.WriteLine("[4] Go Back");
+                    Console.WriteLine("Enter your choice:");
 
-                int choice = Convert.ToInt32(Console.ReadLine());
+                    int choice = Convert.ToInt32(Console.ReadLine());
 
-                switch (choice) {
-                    case 1:
-                        Book book = new();
-                        Inventory.Add(book);
-                        continue;
-                    case 2:
-                        CD cd = new();
-                        Inventory.Add(cd);
-                        continue;
-                    case 3: 
-                        DVD dvd = new();
-                        Inventory.Add(dvd);
-                        continue;
-                    case 4:
-                        break;
-                    default:
-                        Console.WriteLine("Invalid choice.");
-                        continue;
+                    switch (choice) {
+                        case 1:
+                            Book book = new();
+                            Inventory.Add(book);
+                            continue;
+                        case 2:
+                            CD cd = new();
+                            Inventory.Add(cd);
+                            continue;
+                        case 3: 
+                            DVD dvd = new();
+                            Inventory.Add(dvd);
+                            continue;
+                        case 4:
+                            break;
+                        default:
+                            Console.WriteLine("Invalid choice.");
+                            continue;
+                    }
+
+                    break;
+                } catch (FormatException e) {
+                    Console.WriteLine(e.Message);
+                    continue;
+                } catch (OverflowException e) {
+                    Console.WriteLine(e.Message);
+                } catch (Exception e) {
+                    Console.WriteLine(e.Message);
                 }
-
-                break;
             }
         }
 
         //Implements all necessary functionaities for removing media from the inventory:
         public void RemoveMedia() {
             while (true) {
-                Console.WriteLine("[1] Remove by Title");
-                Console.WriteLine("[2] Remove by Genre");
-                Console.WriteLine("[3] Remove by Release Year");
-                Console.WriteLine("[4] Remove by Author");
-                Console.WriteLine("[5] Remove by Artist");
-                Console.WriteLine("[6] Remove by Director");
-                Console.WriteLine("[7] Remove by Studio");
-                Console.WriteLine("[8] Remove by Publisher");
-                Console.WriteLine("[9] Remove by Record Company");
-                Console.WriteLine("[10] Go back");
-                Console.WriteLine("Enter your choice:");
+                try {
+                    Console.WriteLine("[1] Remove by Title");
+                    Console.WriteLine("[2] Remove by Genre");
+                    Console.WriteLine("[3] Remove by Release Year");
+                    Console.WriteLine("[4] Remove by Author");
+                    Console.WriteLine("[5] Remove by Artist");
+                    Console.WriteLine("[6] Remove by Director");
+                    Console.WriteLine("[7] Remove by Studio");
+                    Console.WriteLine("[8] Remove by Publisher");
+                    Console.WriteLine("[9] Remove by Record Company");
+                    Console.WriteLine("[10] Go back");
+                    Console.WriteLine("Enter your choice:");
 
-                int choice = Convert.ToInt32(Console.ReadLine());
+                    int choice = Convert.ToInt32(Console.ReadLine());
 
-                switch (choice) {
-                    case 1:
-                        Console.WriteLine("Enter Title:");
-                        string? title = Console.ReadLine();
+                    switch (choice) {
+                        case 1:
+                            Console.WriteLine("Enter Title:");
+                            string? title = Console.ReadLine();
 
-                        foreach (var media in Inventory) {
-                            if (media.Title == title) {
-                                Inventory.Remove(media);
+                            foreach (var media in Inventory) {
+                                if (media.Title == title) {
+                                    Inventory.Remove(media);
+                                }
                             }
-                        }
-                        break;
-                    case 2:
-                        Console.WriteLine("Enter Genre:");
-                        string? genre = Console.ReadLine();
+                            break;
+                        case 2:
+                            Console.WriteLine("Enter Genre:");
+                            string? genre = Console.ReadLine();
 
-                        foreach (var media in Inventory) {
-                            if (media.Genre == genre) {
-                                Inventory.Remove(media);
+                            foreach (var media in Inventory) {
+                                if (media.Genre == genre) {
+                                    Inventory.Remove(media);
+                                }
                             }
-                        }
-                        break;
-                    case 3:
-                        Console.WriteLine("Enter Release Year:");
-                        int releaseyear = Convert.ToInt32(Console.ReadLine());
+                            break;
+                        case 3:
+                            Console.WriteLine("Enter Release Year:");
+                            int releaseyear = Convert.ToInt32(Console.ReadLine());
 
-                        foreach (var media in Inventory) {
-                            if (media.ReleaseYear == releaseyear) {
-                                Inventory.Remove(media);
+                            foreach (var media in Inventory) {
+                                if (media.ReleaseYear == releaseyear) {
+                                    Inventory.Remove(media);
+                                }
                             }
-                        }
-                        break;
-                    case 4:
-                        Console.WriteLine("Enter author's name:");
-                        string? author = Console.ReadLine();
+                            break;
+                        case 4:
+                            Console.WriteLine("Enter author's name:");
+                            string? author = Console.ReadLine();
 
-                        foreach (var media in Inventory) {
-                            if (media is Book && (((Book)media).Author) == author) {
-                                Inventory.Remove(media);
+                            foreach (var media in Inventory) {
+                                if (media is Book && (((Book)media).Author) == author) {
+                                    Inventory.Remove(media);
+                                }
                             }
-                        }
-                        break;
-                    case 5:
-                        Console.WriteLine("Enter artist's name:");
-                        string? artist = Console.ReadLine();
+                            break;
+                        case 5:
+                            Console.WriteLine("Enter artist's name:");
+                            string? artist = Console.ReadLine();
 
-                        foreach (var media in Inventory) {
-                            if (media is CD && (((CD)media).Artist) == artist) {
-                                Inventory.Remove(media);
+                            foreach (var media in Inventory) {
+                                if (media is CD && (((CD)media).Artist) == artist) {
+                                    Inventory.Remove(media);
+                                }
                             }
-                        }
-                        break;
-                    case 6:
-                        Console.WriteLine("Enter director's name:");
-                        string? director = Console.ReadLine();
+                            break;
+                        case 6:
+                            Console.WriteLine("Enter director's name:");
+                            string? director = Console.ReadLine();
 
-                        foreach (var media in Inventory) {
-                            if (media is DVD && (((DVD)media).Director) == director) {
-                                Inventory.Remove(media);
+                            foreach (var media in Inventory) {
+                                if (media is DVD && (((DVD)media).Director) == director) {
+                                    Inventory.Remove(media);
+                                }
                             }
-                        }
-                        break;
-                    case 7:
-                        Console.WriteLine("Enter studio's name:");
-                        string? studio = Console.ReadLine();
+                            break;
+                        case 7:
+                            Console.WriteLine("Enter studio's name:");
+                            string? studio = Console.ReadLine();
 
-                        foreach (var media in Inventory) {
-                            //It is needed for the media to be a DVD in order to have a studio attribute. Then type casting has been used
-                            if (media is DVD && (((DVD)media).Studio) == studio) {
-                                Inventory.Remove(media);
+                            foreach (var media in Inventory) {
+                                //It is needed for the media to be a DVD in order to have a studio attribute. Then type casting has been used
+                                if (media is DVD && (((DVD)media).Studio) == studio) {
+                                    Inventory.Remove(media);
+                                }
                             }
-                        }
-                        break;
-                    case 8:
-                        Console.WriteLine("Enter publisher's name:");
-                        string? publisher = Console.ReadLine();
+                            break;
+                        case 8:
+                            Console.WriteLine("Enter publisher's name:");
+                            string? publisher = Console.ReadLine();
 
-                        foreach (var media in Inventory) {
-                            if (media is Book && (((Book)media).Publisher) == publisher) {
-                                Inventory.Remove(media);
+                            foreach (var media in Inventory) {
+                                if (media is Book && (((Book)media).Publisher) == publisher) {
+                                    Inventory.Remove(media);
+                                }
                             }
-                        }
-                        break;
-                    case 9:
-                        Console.WriteLine("Enter record company's name:");
-                        string? recordcompany = Console.ReadLine();
+                            break;
+                        case 9:
+                            Console.WriteLine("Enter record company's name:");
+                            string? recordcompany = Console.ReadLine();
 
-                        foreach (var media in Inventory) {
-                            if (media is CD && (((CD)media).RecordCompany) == recordcompany) {
-                                Inventory.Remove(media);
+                            foreach (var media in Inventory) {
+                                if (media is CD && (((CD)media).RecordCompany) == recordcompany) {
+                                    Inventory.Remove(media);
+                                }
                             }
-                        }
-                        break;
-                    case 10:
-                        Console.WriteLine("\nGoing back...");
-                        break;
-                    default:
-                        Console.WriteLine("Invalid choice.");
-                        continue;
+                            break;
+                        case 10:
+                            Console.WriteLine("\nGoing back...");
+                            break;
+                        default:
+                            Console.WriteLine("Invalid choice.");
+                            continue;
+                    }
+
+                    break;
+                } catch (IOException e) {
+                    Console.WriteLine(e.Message);
+                    continue;
+                } catch (FormatException e) {
+                    Console.WriteLine(e.Message);
+                    continue;
+                } catch (Exception e) {
+                    Console.WriteLine(e.Message);
+                    continue;
                 }
-
-                break;
             }
         }
        
         //Implements all necessary functionaities for searching media from the inventory:
         public void Search () {
             while (true) {
-                Console.WriteLine("[1] Search by Title");
-                Console.WriteLine("[2] Search by Genre");
-                Console.WriteLine("[3] Search by Release Year");
-                Console.WriteLine("[4] Search by Author");
-                Console.WriteLine("[5] Search by Artist");
-                Console.WriteLine("[6] Search by Director");
-                Console.WriteLine("[7] Search by Studio");
-                Console.WriteLine("[8] Search by Publisher");
-                Console.WriteLine("[9] Search by Record Company");
-                Console.WriteLine("[10] Go back");
-                Console.WriteLine("Enter your choice:");
+                try {
+                    Console.WriteLine("[1] Search by Title");
+                    Console.WriteLine("[2] Search by Genre");
+                    Console.WriteLine("[3] Search by Release Year");
+                    Console.WriteLine("[4] Search by Author");
+                    Console.WriteLine("[5] Search by Artist");
+                    Console.WriteLine("[6] Search by Director");
+                    Console.WriteLine("[7] Search by Studio");
+                    Console.WriteLine("[8] Search by Publisher");
+                    Console.WriteLine("[9] Search by Record Company");
+                    Console.WriteLine("[10] Go back");
+                    Console.WriteLine("Enter your choice:");
 
-                int choice = Convert.ToInt32(Console.ReadLine());
+                    int choice = Convert.ToInt32(Console.ReadLine());
 
-                switch (choice) {
-                    case 1:
-                        Console.WriteLine("Enter the title:");
-                        string? title = Console.ReadLine();
+                    switch (choice) {
+                        case 1:
+                            Console.WriteLine("Enter the title:");
+                            string? title = Console.ReadLine();
 
-                        var TitleMatches = Inventory
+                            var TitleMatches = Inventory
 
-                        /*
-                        In this code,
+                            /*
+                            In this code,
 
-                        1. Where is used to find the media that match with user's input.
+                            1. Where is used to find the media that match with user's input.
 
-                        2. Lambda expression, media => is used for indicating each and every.
+                            2. Lambda expression, media => is used for indicating each and every.
 
-                        */
+                            */
 
-                        .Where(media => media.Title?
+                            .Where(media => media.Title?
 
-                        /*
+                            /*
 
-                        3. IndexOf checks whether the provided string or piece of string is present in the searcing context irrespective of the letter case (StringComparison.OrdinalIgnoreCase does the job). It returns -1 if match not found and returns 0 if the context string is empty. We will only think about the case when it will return greater than 0.
+                            3. IndexOf checks whether the provided string or piece of string is present in the searcing context irrespective of the letter case (StringComparison.OrdinalIgnoreCase does the job). It returns -1 if match not found and returns 0 if the context string is empty. We will only think about the case when it will return greater than 0.
 
-                        */
+                            */
 
-                        .IndexOf(title, StringComparison.OrdinalIgnoreCase) >= 0)
-                        .ToList();
+                            .IndexOf(title, StringComparison.OrdinalIgnoreCase) >= 0)
+                            .ToList();
 
 
 
-                        if (TitleMatches.Count == 0) {
-                            Console.WriteLine("No results found!");
-                        } else {
-                            ShowMatches(TitleMatches);
-                        }
+                            if (TitleMatches.Count == 0) {
+                                Console.WriteLine("No results found!");
+                            } else {
+                                ShowMatches(TitleMatches);
+                            }
+                            
+                            break;
+                        case 2:
+                            Console.WriteLine("Enter the genre:");
+                            string? genre = Console.ReadLine();
+
+                            var GenreMatches = Inventory
+                            .Where(media => media.Genre?
+                            .IndexOf(genre, StringComparison.OrdinalIgnoreCase) >= 0)
+                            .ToList();
+
+                            if (GenreMatches.Count == 0) {
+                                Console.WriteLine("No results found!");
+                            } else {
+                                ShowMatches(GenreMatches);
+                            }
+                            break;
+                        case 3:
+                            Console.WriteLine("Enter release year:");
+                            int r_year = Convert.ToInt32(Console.ReadLine());
+
+                            var RYearMatches = Inventory
+                            .Where(media => media.ReleaseYear == r_year)
+                            .ToList();
+
+                            if (RYearMatches.Count == 0) {
+                                Console.WriteLine("No results found!");
+                            } else {
+                                ShowMatches(RYearMatches);
+                            }
+                            break;
+                        case 4:
+                            Console.WriteLine("Enter author's name:");
+                            string? auth = Console.ReadLine();
+
+                            var AuthMatches = Inventory
+                            .Where(media => media is Book && ((Book)media).Author?
+                            .IndexOf(auth, StringComparison.OrdinalIgnoreCase) >= 0)
+                            .ToList();
+
+                            if (AuthMatches.Count == 0) {
+                                Console.WriteLine("No results found!");
+                            } else {
+                                ShowMatches(AuthMatches);
+                            }
+                            break;
+                        case 5:
+                            Console.WriteLine("Enter artist's name:");
+                            string? artt = Console.ReadLine();
+
+                            var ArttMatches = Inventory
+                            .Where(media => media is CD && ((CD)media).Artist?
+                            .IndexOf(artt, StringComparison.OrdinalIgnoreCase) >= 0)
+                            .ToList();
+
+                            if (ArttMatches.Count == 0) {
+                                Console.WriteLine("No results found!");
+                            } else {
+                                ShowMatches(ArttMatches);
+                            } 
+                            break;
+                        case 6:
+                            Console.WriteLine("Enter director's name:");
+                            string? dir = Console.ReadLine();
+
+                            var DirMatches = Inventory
+                            .Where(media => media is DVD && ((DVD)media).Director?
+                            .IndexOf(dir, StringComparison.OrdinalIgnoreCase) >= 0)
+                            .ToList();
+
+                            if (DirMatches.Count == 0) {
+                                Console.WriteLine("No results found!");
+                            } else {
+                                ShowMatches(DirMatches);
+                            } 
+                            break;
+                        case 7:
+                            Console.WriteLine("Enter studio's name:");
+                            string? std = Console.ReadLine();
+
+                            var StdMatches = Inventory
+                            .Where(media => media is DVD && ((DVD)media).Studio?
+                            .IndexOf(std, StringComparison.OrdinalIgnoreCase) >= 0)
+                            .ToList();
+
+                            if (StdMatches.Count == 0) {
+                                Console.WriteLine("No results found!");
+                            } else {
+                                ShowMatches(StdMatches);
+                            } 
+                            break;
+                        case 8:
+                            Console.WriteLine("Enter publisher's name:");
+                            string? pub = Console.ReadLine();
+
+                            var PubMatches = Inventory
+                            .Where(media => media is Book && ((Book)media).Publisher?
+                            .IndexOf(pub, StringComparison.OrdinalIgnoreCase) >= 0)
+                            .ToList();
+
+                            if (PubMatches.Count == 0) {
+                                Console.WriteLine("No results found!");
+                            } else {
+                                ShowMatches(PubMatches);
+                            } 
+                            break;
+                        case 9:
+                            Console.WriteLine("Enter record company's name:");
+                            string? rec = Console.ReadLine();
+
+                            var RecMatches = Inventory
+                            .Where(media => media is CD && ((CD)media).RecordCompany?
+                            .IndexOf(rec, StringComparison.OrdinalIgnoreCase) >= 0)
+                            .ToList();
+
+                            if (RecMatches.Count == 0) {
+                                Console.WriteLine("No results found!");
+                            } else {
+                                ShowMatches(RecMatches);
+                            } 
+                            break;
+                        case 10:
+                            Console.WriteLine("\nGoing back...");
+                            break;
+                        default:
+                            Console.WriteLine("Invalid choice.");
+                            continue;
                         
-                        break;
-                    case 2:
-                        Console.WriteLine("Enter the genre:");
-                        string? genre = Console.ReadLine();
+                    }
 
-                        var GenreMatches = Inventory
-                        .Where(media => media.Genre?
-                        .IndexOf(genre, StringComparison.OrdinalIgnoreCase) >= 0)
-                        .ToList();
-
-                        if (GenreMatches.Count == 0) {
-                            Console.WriteLine("No results found!");
-                        } else {
-                            ShowMatches(GenreMatches);
-                        }
-                        break;
-                    case 3:
-                        Console.WriteLine("Enter release year:");
-                        int r_year = Convert.ToInt32(Console.ReadLine());
-
-                        var RYearMatches = Inventory
-                        .Where(media => media.ReleaseYear == r_year)
-                        .ToList();
-
-                        if (RYearMatches.Count == 0) {
-                            Console.WriteLine("No results found!");
-                        } else {
-                            ShowMatches(RYearMatches);
-                        }
-                        break;
-                    case 4:
-                        Console.WriteLine("Enter author's name:");
-                        string? auth = Console.ReadLine();
-
-                        var AuthMatches = Inventory
-                        .Where(media => media is Book && ((Book)media).Author?
-                        .IndexOf(auth, StringComparison.OrdinalIgnoreCase) >= 0)
-                        .ToList();
-
-                        if (AuthMatches.Count == 0) {
-                            Console.WriteLine("No results found!");
-                        } else {
-                            ShowMatches(AuthMatches);
-                        }
-                        break;
-                    case 5:
-                        Console.WriteLine("Enter artist's name:");
-                        string? artt = Console.ReadLine();
-
-                        var ArttMatches = Inventory
-                        .Where(media => media is CD && ((CD)media).Artist?
-                        .IndexOf(artt, StringComparison.OrdinalIgnoreCase) >= 0)
-                        .ToList();
-
-                        if (ArttMatches.Count == 0) {
-                            Console.WriteLine("No results found!");
-                        } else {
-                            ShowMatches(ArttMatches);
-                        } 
-                        break;
-                    case 6:
-                        Console.WriteLine("Enter director's name:");
-                        string? dir = Console.ReadLine();
-
-                        var DirMatches = Inventory
-                        .Where(media => media is DVD && ((DVD)media).Director?
-                        .IndexOf(dir, StringComparison.OrdinalIgnoreCase) >= 0)
-                        .ToList();
-
-                        if (DirMatches.Count == 0) {
-                            Console.WriteLine("No results found!");
-                        } else {
-                            ShowMatches(DirMatches);
-                        } 
-                        break;
-                    case 7:
-                        Console.WriteLine("Enter studio's name:");
-                        string? std = Console.ReadLine();
-
-                        var StdMatches = Inventory
-                        .Where(media => media is DVD && ((DVD)media).Studio?
-                        .IndexOf(std, StringComparison.OrdinalIgnoreCase) >= 0)
-                        .ToList();
-
-                        if (StdMatches.Count == 0) {
-                            Console.WriteLine("No results found!");
-                        } else {
-                            ShowMatches(StdMatches);
-                        } 
-                        break;
-                    case 8:
-                        Console.WriteLine("Enter publisher's name:");
-                        string? pub = Console.ReadLine();
-
-                        var PubMatches = Inventory
-                        .Where(media => media is Book && ((Book)media).Publisher?
-                        .IndexOf(pub, StringComparison.OrdinalIgnoreCase) >= 0)
-                        .ToList();
-
-                        if (PubMatches.Count == 0) {
-                            Console.WriteLine("No results found!");
-                        } else {
-                            ShowMatches(PubMatches);
-                        } 
-                        break;
-                    case 9:
-                        Console.WriteLine("Enter record company's name:");
-                        string? rec = Console.ReadLine();
-
-                        var RecMatches = Inventory
-                        .Where(media => media is CD && ((CD)media).RecordCompany?
-                        .IndexOf(rec, StringComparison.OrdinalIgnoreCase) >= 0)
-                        .ToList();
-
-                        if (RecMatches.Count == 0) {
-                            Console.WriteLine("No results found!");
-                        } else {
-                            ShowMatches(RecMatches);
-                        } 
-                        break;
-                    case 10:
-                        Console.WriteLine("\nGoing back...");
-                        break;
-                    default:
-                        Console.WriteLine("Invalid choice.");
-                        continue;
-                    
+                    break;
+            
+                } catch (IOException e) { //According to the documentation of ".WriteLine()"
+                    Console.WriteLine(e.Message);
+                    continue;
+                } catch (OverflowException o) {
+                    Console.WriteLine(o.Message); //According to the documentation of ".ToInt32()"
+                    continue;
+                } catch (FormatException f) { //From user inputs
+                    Console.WriteLine(f.Message);
+                    continue;
+                } catch (ArgumentNullException an) { //According to the documentation of "Where" clause
+                    Console.WriteLine(an.Message);
+                    continue;
+                } catch (ArgumentException a) { //According to the documentation of "IndexOf" clause
+                    Console.WriteLine(a.Message);
+                    continue;
+                } catch (Exception e) { //Any unprecedented exception
+                    Console.WriteLine(e.Message);
+                    continue;
                 }
-
-                break;
             }
         }
 
@@ -484,7 +535,7 @@ namespace Assignment
                 } else if (media is CD cd) {
 
                     Console.WriteLine(i + ".CD:");
-                    Console.WriteLine($"Title: {cd.Title}\nArtist: {cd.Artist}\nGenre: {cd.Genre}\nRelease Year: {cd.ReleaseYear}\nRecording Comapny: {cd.RecordCompany}");
+                    Console.WriteLine($"Title: {cd.Title}\nArtist: {cd.Artist}\nGenre: {cd.Genre}\nRelease Year: {cd.ReleaseYear}\nRecording Comapany: {cd.RecordCompany}");
 
                 } else if (media is DVD dvd) {
 
@@ -517,10 +568,9 @@ namespace Assignment
             double percent3 = Convert.ToDouble(GetDVDsCount())/Convert.ToDouble(Inventory.Count) * 100;
 
             Console.WriteLine($"Total: {Inventory.Count}");
-            Console.WriteLine($"Books: {GetBooksCount()} ({percent1}%)");
-            Console.WriteLine($"CDs: {GetCDsCount()} ({percent2}%)");
-            Console.WriteLine($"DVDs: {GetDVDsCount()} ({percent3}%)");
-        
+            Console.WriteLine($"Books: {GetBooksCount()} ({percent1.ToString("F2")}%)");
+            Console.WriteLine($"CDs: {GetCDsCount()} ({percent2.ToString("F2")}%)");
+            Console.WriteLine($"DVDs: {GetDVDsCount()} ({percent3.ToString("F2")}%)");
         } 
 
         //Implements all necessary functionaities to update a media of the inventory. We will only allow the user to search by title and update it. But here's the catch:
@@ -541,330 +591,353 @@ namespace Assignment
                 Console.WriteLine("No results found!");
             } else {
                 while (true) {
-                    Console.WriteLine($"Following matches found:");
-                    ShowMatches(ToUpdate);
+                   try {
+                        Console.WriteLine($"Following matches found:");
+                        ShowMatches(ToUpdate);
 
-                    Console.WriteLine("Which media do you want to update?\n");
+                        Console.WriteLine("Which media do you want to update?\n");
 
-                    int index = 1;
+                        int index = 1;
 
-                    foreach (var media in ToUpdate) {
-                        Console.WriteLine($"[{index}] {media.Title}");
-                        index++;
-                    }
+                        foreach (var media in ToUpdate) {
+                            Console.WriteLine($"[{index}] {media.Title}");
+                            index++;
+                        }
 
-                    Console.WriteLine("Enter your choice (Type -1 to go back):");
+                        Console.WriteLine("Enter your choice (Type -1 to go back):");
 
-                    int choice = Convert.ToInt32(Console.ReadLine());
+                        int choice = Convert.ToInt32(Console.ReadLine());
 
-                    //Make sure the user selects a valid choice:
-                    if (choice > 0 && choice <= ToUpdate.Count) {
+                        //Make sure the user selects a valid choice:
+                        if (choice > 0 && choice <= ToUpdate.Count) {
 
-                        if (ToUpdate[choice - 1] /*Indexing works from 0. But user was shown options starting from 1.Thus subtracting 1 from choice to grab the right media from the list*/ is Book b) {
-                            while (true) {
-                                Console.WriteLine($"Which property of the book \"{b.Title}\" you want to update?");
-                                Console.WriteLine("[1] Title");
-                                Console.WriteLine("[2] Genre");
-                                Console.WriteLine("[3] Author");
-                                Console.WriteLine("[4] Release Year");
-                                Console.WriteLine("[5] Publisher");
-                                Console.WriteLine("Enter your choice:");
+                            if (ToUpdate[choice - 1] /*Indexing works from 0. But user was shown options starting from 1.Thus subtracting 1 from choice to grab the right media from the list*/ is Book b) {
+                                while (true) {
+                                    Console.WriteLine($"Which property of the book \"{b.Title}\" you want to update?");
+                                    Console.WriteLine("[1] Title");
+                                    Console.WriteLine("[2] Genre");
+                                    Console.WriteLine("[3] Author");
+                                    Console.WriteLine("[4] Release Year");
+                                    Console.WriteLine("[5] Publisher");
+                                    Console.WriteLine("Enter your choice:");
 
-                                int propChoice = Convert.ToInt32(Console.ReadLine());
+                                    int propChoice = Convert.ToInt32(Console.ReadLine());
 
-                                switch (propChoice) {
-                                    case 1:
-                                        Console.WriteLine("Enter new title:");
-                                        string? NewTitl = Console.ReadLine();
+                                    switch (propChoice) {
+                                        case 1:
+                                            Console.WriteLine("Enter new title:");
+                                            string? NewTitl = Console.ReadLine();
 
-                                        int IndexOfBookToUpdateInfo = Inventory.FindIndex(media => media.Title == b.Title);
+                                            int IndexOfBookToUpdateInfo = Inventory.FindIndex(media => media.Title == b.Title);
 
-                                        Inventory[IndexOfBookToUpdateInfo].Title = NewTitl;
-                                        Console.WriteLine("Title updated successfully");
+                                            Inventory[IndexOfBookToUpdateInfo].Title = NewTitl;
+                                            Console.WriteLine("Title updated successfully");
 
-                                        break;
-                                    case 2:
-                                        Console.WriteLine("Enter new genre:");
-                                        string? NewGen = Console.ReadLine();
+                                            break;
+                                        case 2:
+                                            Console.WriteLine("Enter new genre:");
+                                            string? NewGen = Console.ReadLine();
 
-                                        IndexOfBookToUpdateInfo = Inventory.FindIndex(media => media.Genre == b.Genre);
+                                            IndexOfBookToUpdateInfo = Inventory.FindIndex(media => media.Genre == b.Genre);
 
-                                        Inventory[IndexOfBookToUpdateInfo].Genre = NewGen;
-                                        Console.WriteLine("Genre updated successfully");
+                                            Inventory[IndexOfBookToUpdateInfo].Genre = NewGen;
+                                            Console.WriteLine("Genre updated successfully");
 
-                                        break;
-                                    case 3:
-                                        Console.WriteLine("Enter new author's name:");
-                                        string? NewAuth = Console.ReadLine();
+                                            break;
+                                        case 3:
+                                            Console.WriteLine("Enter new author's name:");
+                                            string? NewAuth = Console.ReadLine();
 
-                                        IndexOfBookToUpdateInfo = Inventory.FindIndex(media => media is Book && ((Book)media).Author == b.Author);
+                                            IndexOfBookToUpdateInfo = Inventory.FindIndex(media => media is Book && ((Book)media).Author == b.Author);
 
-                                        ((Book)Inventory[IndexOfBookToUpdateInfo]).Author = NewAuth;
-                                        Console.WriteLine("Author updated successfully");
+                                            ((Book)Inventory[IndexOfBookToUpdateInfo]).Author = NewAuth;
+                                            Console.WriteLine("Author updated successfully");
 
-                                        break;
-                                    case 4:
-                                        Console.WriteLine("Enter new release year:");
-                                        int NewRY = Convert.ToInt32(Console.ReadLine());
+                                            break;
+                                        case 4:
+                                            Console.WriteLine("Enter new release year:");
+                                            int NewRY = Convert.ToInt32(Console.ReadLine());
 
-                                        IndexOfBookToUpdateInfo = Inventory.FindIndex(media => media.ReleaseYear == b.ReleaseYear);
+                                            IndexOfBookToUpdateInfo = Inventory.FindIndex(media => media.ReleaseYear == b.ReleaseYear);
 
-                                        Inventory[IndexOfBookToUpdateInfo].ReleaseYear = NewRY;
-                                        Console.WriteLine("Release year updated successfully");
-                                        
-                                        break;
-                                    case 5:
-                                        Console.WriteLine("Enter new publisher's name:");
-                                        string? NewPub = Console.ReadLine();
-
-                                        IndexOfBookToUpdateInfo = Inventory.FindIndex(media => media is Book && ((Book)media).Publisher == b.Publisher);
-
-                                        ((Book)Inventory[IndexOfBookToUpdateInfo]).Publisher = NewPub;
-                                        Console.WriteLine("Publisher updated successfully");
-
-                                        break;
-                                    default:
-                                        Console.WriteLine("Invalid choice!");
-                                        continue;
-                                }
-
-                                break;
-                            }
-                        } else if (ToUpdate[choice - 1] is CD cd) {
-                            
-                            while (true) {
-                                Console.WriteLine($"Which property of the CD \"{cd.Title}\" you want to update?");
-                                Console.WriteLine("[1] Title");
-                                Console.WriteLine("[2] Genre");
-                                Console.WriteLine("[3] Artist");
-                                Console.WriteLine("[4] Release Year");
-                                Console.WriteLine("[5] Record Company");
-                                Console.WriteLine("[6] Tracklist");
-                                Console.WriteLine("Enter your choice:");
-
-                                int propChoice = Convert.ToInt32(Console.ReadLine());
-
-                                switch (propChoice) {
-                                    case 1:
-                                        Console.WriteLine("Enter new title:");
-                                        string? NewTitl = Console.ReadLine();
-
-                                        int IndexOfCDToUpdateInfo = Inventory.FindIndex(media => media.Title == cd.Title);
-
-                                        Inventory[IndexOfCDToUpdateInfo].Title = NewTitl;
-                                        Console.WriteLine("Title updated successfully");
-
-                                        break;
-                                    case 2:
-                                        Console.WriteLine("Enter new genre:");
-                                        string? NewGen = Console.ReadLine();
-
-                                        IndexOfCDToUpdateInfo = Inventory.FindIndex(media => media.Genre == cd.Genre);
-
-                                        Inventory[IndexOfCDToUpdateInfo].Genre = NewGen;
-                                        Console.WriteLine("Genre updated successfully");
-
-                                        break;
-                                    case 3:
-                                        Console.WriteLine("Enter new artist's name:");
-                                        string? NewArtist = Console.ReadLine();
-
-                                        IndexOfCDToUpdateInfo = Inventory.FindIndex(media => media is CD && ((CD)media).Artist == cd.Artist);
-
-                                        ((CD)Inventory[IndexOfCDToUpdateInfo]).Artist = NewArtist;
-                                        Console.WriteLine("Artist updated successfully");
-
-                                        break;
-                                    case 4:
-                                        Console.WriteLine("Enter new release year:");
-                                        int NewRY = Convert.ToInt32(Console.ReadLine());
-
-                                        IndexOfCDToUpdateInfo = Inventory.FindIndex(media => media.ReleaseYear == cd.ReleaseYear);
-
-                                        Inventory[IndexOfCDToUpdateInfo].ReleaseYear = NewRY;
-                                        Console.WriteLine("Release year updated successfully");
-                                        
-                                        break;
-                                    case 5:
-                                        Console.WriteLine("Enter new record company's name:");
-                                        string? NewRec = Console.ReadLine();
-
-                                        IndexOfCDToUpdateInfo = Inventory.FindIndex(media => media is CD && ((CD)media).RecordCompany == cd.RecordCompany);
-
-                                        ((CD)Inventory[IndexOfCDToUpdateInfo]).RecordCompany = NewRec;
-                                        Console.WriteLine("Record company updated successfully");
-
-                                        break;
-                                    case 6:
-                                        while (true) {
-                                            Console.WriteLine("Showing current tracks:");
-                                            cd.ShowTrackList();
+                                            Inventory[IndexOfBookToUpdateInfo].ReleaseYear = NewRY;
+                                            Console.WriteLine("Release year updated successfully");
                                             
-                                            Console.WriteLine("\nWhat changes you want to make?");
-                                            Console.WriteLine("[1] Change single track");
-                                            Console.WriteLine("[2] Add a new tracklist");
-                                            Console.WriteLine("Enter your choice: ");
+                                            break;
+                                        case 5:
+                                            Console.WriteLine("Enter new publisher's name:");
+                                            string? NewPub = Console.ReadLine();
 
-                                            int ChangingChoice = Convert.ToInt32(Console.ReadLine());
+                                            IndexOfBookToUpdateInfo = Inventory.FindIndex(media => media is Book && ((Book)media).Publisher == b.Publisher);
 
-                                            switch (ChangingChoice) {
-                                                case 1:
-                                                    while (true) {
-                                                        Console.WriteLine("Which song do you want to change?");
-                                                        Console.WriteLine("Enter your choice:");
+                                            ((Book)Inventory[IndexOfBookToUpdateInfo]).Publisher = NewPub;
+                                            Console.WriteLine("Publisher updated successfully");
 
-                                                        int TrackChoice = Convert.ToInt32(Console.ReadLine());
+                                            break;
+                                        default:
+                                            Console.WriteLine("Invalid choice!");
+                                            continue;
+                                    }
 
-                                                        if (TrackChoice >= 1 && TrackChoice <= cd.numberOfSongs) {
-                                                            Console.WriteLine("Enter new track:");
-                                                            string? NewTrack = Console.ReadLine();
+                                    break;
+                                }
+                            } else if (ToUpdate[choice - 1] is CD cd) {
+                                
+                                while (true) {
+                                    Console.WriteLine($"Which property of the CD \"{cd.Title}\" you want to update?");
+                                    Console.WriteLine("[1] Title");
+                                    Console.WriteLine("[2] Genre");
+                                    Console.WriteLine("[3] Artist");
+                                    Console.WriteLine("[4] Release Year");
+                                    Console.WriteLine("[5] Record Company");
+                                    Console.WriteLine("[6] Tracklist");
+                                    Console.WriteLine("Enter your choice:");
 
-                                                            cd.UpdateSingleTrack(TrackChoice - 1, NewTrack);
-                                                            //TrackChoice starts from 1. But the TrackList indexing starts from 0. So sending the parameter with 1 less.
+                                    int propChoice = Convert.ToInt32(Console.ReadLine());
 
-                                                            break;
-                                                        } else {
-                                                            Console.WriteLine("Invalid song choice");
-                                                            continue;
+                                    switch (propChoice) {
+                                        case 1:
+                                            Console.WriteLine("Enter new title:");
+                                            string? NewTitl = Console.ReadLine();
+
+                                            int IndexOfCDToUpdateInfo = Inventory.FindIndex(media => media.Title == cd.Title);
+
+                                            Inventory[IndexOfCDToUpdateInfo].Title = NewTitl;
+                                            Console.WriteLine("Title updated successfully");
+
+                                            break;
+                                        case 2:
+                                            Console.WriteLine("Enter new genre:");
+                                            string? NewGen = Console.ReadLine();
+
+                                            IndexOfCDToUpdateInfo = Inventory.FindIndex(media => media.Genre == cd.Genre);
+
+                                            Inventory[IndexOfCDToUpdateInfo].Genre = NewGen;
+                                            Console.WriteLine("Genre updated successfully");
+
+                                            break;
+                                        case 3:
+                                            Console.WriteLine("Enter new artist's name:");
+                                            string? NewArtist = Console.ReadLine();
+
+                                            IndexOfCDToUpdateInfo = Inventory.FindIndex(media => media is CD && ((CD)media).Artist == cd.Artist);
+
+                                            ((CD)Inventory[IndexOfCDToUpdateInfo]).Artist = NewArtist;
+                                            Console.WriteLine("Artist updated successfully");
+
+                                            break;
+                                        case 4:
+                                            Console.WriteLine("Enter new release year:");
+                                            int NewRY = Convert.ToInt32(Console.ReadLine());
+
+                                            IndexOfCDToUpdateInfo = Inventory.FindIndex(media => media.ReleaseYear == cd.ReleaseYear);
+
+                                            Inventory[IndexOfCDToUpdateInfo].ReleaseYear = NewRY;
+                                            Console.WriteLine("Release year updated successfully");
+                                            
+                                            break;
+                                        case 5:
+                                            Console.WriteLine("Enter new record company's name:");
+                                            string? NewRec = Console.ReadLine();
+
+                                            IndexOfCDToUpdateInfo = Inventory.FindIndex(media => media is CD && ((CD)media).RecordCompany == cd.RecordCompany);
+
+                                            ((CD)Inventory[IndexOfCDToUpdateInfo]).RecordCompany = NewRec;
+                                            Console.WriteLine("Record company updated successfully");
+
+                                            break;
+                                        case 6:
+                                            while (true) {
+                                                Console.WriteLine("Showing current tracks:");
+                                                cd.ShowTrackList();
+                                                
+                                                Console.WriteLine("\nWhat changes you want to make?");
+                                                Console.WriteLine("[1] Change single track");
+                                                Console.WriteLine("[2] Add a new tracklist");
+                                                Console.WriteLine("Enter your choice: ");
+
+                                                int ChangingChoice = Convert.ToInt32(Console.ReadLine());
+
+                                                switch (ChangingChoice) {
+                                                    case 1:
+                                                        while (true) {
+                                                            Console.WriteLine("Which song do you want to change?");
+                                                            Console.WriteLine("Enter your choice:");
+
+                                                            int TrackChoice = Convert.ToInt32(Console.ReadLine());
+
+                                                            if (TrackChoice >= 1 && TrackChoice <= cd.numberOfSongs) {
+                                                                Console.WriteLine("Enter new track:");
+                                                                string? NewTrack = Console.ReadLine();
+
+                                                                cd.UpdateSingleTrack(TrackChoice - 1, NewTrack);
+                                                                //TrackChoice starts from 1. But the TrackList indexing starts from 0. So sending the parameter with 1 less.
+
+                                                                break;
+                                                            } else {
+                                                                Console.WriteLine("Invalid song choice");
+                                                                continue;
+                                                            }
                                                         }
-                                                    }
 
-                                                    break;
-                                                case 2:
-                                                    int NewNumberOfSongs;
+                                                        break;
+                                                    case 2:
+                                                        int NewNumberOfSongs;
 
-                                                    while (true) {
-                                                        Console.WriteLine("How many songs you want to add? (At most 20)");
+                                                        while (true) {
+                                                            Console.WriteLine("How many songs you want to add? (At most 20)");
 
-                                                        NewNumberOfSongs = Convert.ToInt32(Console.ReadLine());
+                                                            NewNumberOfSongs = Convert.ToInt32(Console.ReadLine());
 
-                                                        if (NewNumberOfSongs > 0 && NewNumberOfSongs <= 20) {
-                                                            break;
-                                                        } else if (NewNumberOfSongs == 0) {
-                                                            Console.WriteLine("Tracklist cannot be empty!");
-                                                            continue;
-                                                        } else {
-                                                            Console.WriteLine("Number of tracks invalid. Enter again.");
-                                                            continue;
+                                                            if (NewNumberOfSongs > 0 && NewNumberOfSongs <= 20) {
+                                                                break;
+                                                            } else if (NewNumberOfSongs == 0) {
+                                                                Console.WriteLine("Tracklist cannot be empty!");
+                                                                continue;
+                                                            } else {
+                                                                Console.WriteLine("Number of tracks invalid. Enter again.");
+                                                                continue;
+                                                            }
                                                         }
-                                                    }
 
-                                                    string?[] NewList = new string?[20];
+                                                        string?[] NewList = new string?[20];
 
-                                                    for (int i = 1; i <= NewNumberOfSongs; i++) {
-                                                        if (i == 1) {
-                                                            Console.WriteLine("Enter 1st song:");
-                                                            NewList[0] = Console.ReadLine();
-                                                        } else if (i == 2) {
-                                                            Console.WriteLine("Enter 2nd song:");
-                                                            NewList[1] = Console.ReadLine();
-                                                        } else if (i == 3) {
-                                                            Console.WriteLine("Enter 3rd song:");
-                                                            NewList[2] = Console.ReadLine();
-                                                        } else {
-                                                            Console.WriteLine("Enter " + i + "th song:");
-                                                            NewList[i-1] = Console.ReadLine();
+                                                        for (int i = 1; i <= NewNumberOfSongs; i++) {
+                                                            if (i == 1) {
+                                                                Console.WriteLine("Enter 1st song:");
+                                                                NewList[0] = Console.ReadLine();
+                                                            } else if (i == 2) {
+                                                                Console.WriteLine("Enter 2nd song:");
+                                                                NewList[1] = Console.ReadLine();
+                                                            } else if (i == 3) {
+                                                                Console.WriteLine("Enter 3rd song:");
+                                                                NewList[2] = Console.ReadLine();
+                                                            } else {
+                                                                Console.WriteLine("Enter " + i + "th song:");
+                                                                NewList[i-1] = Console.ReadLine();
+                                                            }
                                                         }
-                                                    }
 
-                                                    cd.AddNewTrackList(NewList, NewNumberOfSongs);
+                                                        cd.AddNewTrackList(NewList, NewNumberOfSongs);
 
-                                                    break;
-                                                default:
-                                                    Console.WriteLine("Invalid choice.");
-                                                    continue;
+                                                        break;
+                                                    default:
+                                                        Console.WriteLine("Invalid choice.");
+                                                        continue;
+                                                }
+
+                                                break;
+                                                
                                             }
 
                                             break;
+                                        default:
+                                            Console.WriteLine("Invalid choice!");
+                                            continue;
+                                    }
+
+                                    break;
+                                }
+
+                            } else if (ToUpdate[choice - 1] is DVD dvd) {
+                                while (true) {
+                                    Console.WriteLine($"Which property of the DVD \"{dvd.Title}\" you want to update?");
+                                    Console.WriteLine("[1] Title");
+                                    Console.WriteLine("[2] Genre");
+                                    Console.WriteLine("[3] Director");
+                                    Console.WriteLine("[4] Release Year");
+                                    Console.WriteLine("[5] Studio");
+                                    Console.WriteLine("Enter your choice:");
+
+                                    int propChoice = Convert.ToInt32(Console.ReadLine());
+
+                                    switch (propChoice) {
+                                        case 1:
+                                            Console.WriteLine("Enter new title:");
+                                            string? NewTitl = Console.ReadLine();
+
+                                            int IndexOfDVDToUpdateInfo = Inventory.FindIndex(media => media.Title == dvd.Title);
+
+                                            Inventory[IndexOfDVDToUpdateInfo].Title = NewTitl;
+                                            Console.WriteLine("Title updated successfully");
+
+                                            break;
+                                        case 2:
+                                            Console.WriteLine("Enter new genre:");
+                                            string? NewGen = Console.ReadLine();
+
+                                            IndexOfDVDToUpdateInfo = Inventory.FindIndex(media => media.Genre == dvd.Genre);
+
+                                            Inventory[IndexOfDVDToUpdateInfo].Genre = NewGen;
+                                            Console.WriteLine("Genre updated successfully");
+
+                                            break;
+                                        case 3:
+                                            Console.WriteLine("Enter new director's name:");
+                                            string? NewDir = Console.ReadLine();
+
+                                            IndexOfDVDToUpdateInfo = Inventory.FindIndex(media => media is DVD && ((DVD)media).Director == dvd.Director);
+
+                                            ((DVD)Inventory[IndexOfDVDToUpdateInfo]).Director = NewDir;
+                                            Console.WriteLine("Director updated successfully");
+
+                                            break;
+                                        case 4:
+                                            Console.WriteLine("Enter new release year:");
+                                            int NewRY = Convert.ToInt32(Console.ReadLine());
+
+                                            IndexOfDVDToUpdateInfo = Inventory.FindIndex(media => media.ReleaseYear == dvd.ReleaseYear);
+
+                                            Inventory[IndexOfDVDToUpdateInfo].ReleaseYear = NewRY;
+                                            Console.WriteLine("Release year updated successfully");
                                             
-                                        }
+                                            break;
+                                        case 5:
+                                            Console.WriteLine("Enter new studio's name:");
+                                            string? NewStd = Console.ReadLine();
 
-                                        break;
-                                    default:
-                                        Console.WriteLine("Invalid choice!");
-                                        continue;
+                                            IndexOfDVDToUpdateInfo = Inventory.FindIndex(media => media is DVD && ((DVD)media).Studio == dvd.Studio);
+
+                                            ((DVD)Inventory[IndexOfDVDToUpdateInfo]).Studio = NewStd;
+                                            Console.WriteLine("Studio updated successfully");
+
+                                            break;
+                                    }
+
+                                    break;
                                 }
-
-                                break;
                             }
 
-                        } else if (ToUpdate[choice - 1] is DVD dvd) {
-                            while (true) {
-                                Console.WriteLine($"Which property of the DVD \"{dvd.Title}\" you want to update?");
-                                Console.WriteLine("[1] Title");
-                                Console.WriteLine("[2] Genre");
-                                Console.WriteLine("[3] Director");
-                                Console.WriteLine("[4] Release Year");
-                                Console.WriteLine("[5] Studio");
-                                Console.WriteLine("Enter your choice:");
-
-                                int propChoice = Convert.ToInt32(Console.ReadLine());
-
-                                switch (propChoice) {
-                                    case 1:
-                                        Console.WriteLine("Enter new title:");
-                                        string? NewTitl = Console.ReadLine();
-
-                                        int IndexOfDVDToUpdateInfo = Inventory.FindIndex(media => media.Title == dvd.Title);
-
-                                        Inventory[IndexOfDVDToUpdateInfo].Title = NewTitl;
-                                        Console.WriteLine("Title updated successfully");
-
-                                        break;
-                                    case 2:
-                                        Console.WriteLine("Enter new genre:");
-                                        string? NewGen = Console.ReadLine();
-
-                                        IndexOfDVDToUpdateInfo = Inventory.FindIndex(media => media.Genre == dvd.Genre);
-
-                                        Inventory[IndexOfDVDToUpdateInfo].Genre = NewGen;
-                                        Console.WriteLine("Genre updated successfully");
-
-                                        break;
-                                    case 3:
-                                        Console.WriteLine("Enter new director's name:");
-                                        string? NewDir = Console.ReadLine();
-
-                                        IndexOfDVDToUpdateInfo = Inventory.FindIndex(media => media is DVD && ((DVD)media).Director == dvd.Director);
-
-                                        ((DVD)Inventory[IndexOfDVDToUpdateInfo]).Director = NewDir;
-                                        Console.WriteLine("Director updated successfully");
-
-                                        break;
-                                    case 4:
-                                        Console.WriteLine("Enter new release year:");
-                                        int NewRY = Convert.ToInt32(Console.ReadLine());
-
-                                        IndexOfDVDToUpdateInfo = Inventory.FindIndex(media => media.ReleaseYear == dvd.ReleaseYear);
-
-                                        Inventory[IndexOfDVDToUpdateInfo].ReleaseYear = NewRY;
-                                        Console.WriteLine("Release year updated successfully");
-                                        
-                                        break;
-                                    case 5:
-                                        Console.WriteLine("Enter new studio's name:");
-                                        string? NewStd = Console.ReadLine();
-
-                                        IndexOfDVDToUpdateInfo = Inventory.FindIndex(media => media is DVD && ((DVD)media).Studio == dvd.Studio);
-
-                                        ((DVD)Inventory[IndexOfDVDToUpdateInfo]).Studio = NewStd;
-                                        Console.WriteLine("Studio updated successfully");
-
-                                        break;
-                                }
-
-                                break;
-                            }
+                        } else if (choice == -1) {
+                            Console.WriteLine("\nGoing back...");
+                        } else {
+                            Console.WriteLine("Invalid choice!");
+                            continue; //Loop again.
                         }
 
-                    } else if (choice == -1) {
-                        Console.WriteLine("\nGoing back...");
-                    } else {
-                        Console.WriteLine("Invalid choice!");
-                        continue; //Loop again.
+                        break;
+                    } catch (IOException e) {
+                        Console.WriteLine(e.Message);
+                        continue;
+                    } catch (FormatException e) {
+                        Console.WriteLine(e.Message);
+                        continue;
+                    } catch (OverflowException e) {
+                        Console.WriteLine(e.Message);
+                        continue;
+                    } catch (ArgumentNullException e) {
+                        Console.WriteLine(e.Message);
+                        continue;
+                    } catch (OutOfMemoryException e) {
+                        Console.WriteLine(e.Message);
+                        continue;
+                    } catch (ArgumentOutOfRangeException e) {
+                        Console.WriteLine(e.Message);
+                        continue;
+                    } catch (Exception e) {
+                        Console.WriteLine(e.Message);
+                        continue;
                     }
-
-                    break;
                 }
             }
         }
@@ -1013,52 +1086,60 @@ namespace Assignment
 
             while (true) //Lock user into an infinite loop unless he chooses to exit
             {
-                Console.WriteLine("\nInventory currently contains:");
-                Console.WriteLine(mgr.GetBooksCount() + " books, " + mgr.GetCDsCount() + " CDs and " + mgr.GetDVDsCount() + " DVDs"); //Always show the state of the inventory.
+                try {
+                    Console.WriteLine("\nInventory currently contains:");
+                    Console.WriteLine(mgr.GetBooksCount() + " books, " + mgr.GetCDsCount() + " CDs and " + mgr.GetDVDsCount() + " DVDs"); //Always show the state of the inventory.
 
-                Console.WriteLine("\nWhat would you like to do?");
+                    Console.WriteLine("\nWhat would you like to do?");
 
-                Console.WriteLine("[1] Add Media");
-                Console.WriteLine("[2] Remove Media");
-                Console.WriteLine("[3] Search");
-                Console.WriteLine("[4] List Items");
-                Console.WriteLine("[5] Get Insights");
-                Console.WriteLine("[6] Update Media");
-                Console.WriteLine("[7] Exit");
+                    Console.WriteLine("[1] Add Media");
+                    Console.WriteLine("[2] Remove Media");
+                    Console.WriteLine("[3] Search");
+                    Console.WriteLine("[4] List Items");
+                    Console.WriteLine("[5] Get Insights");
+                    Console.WriteLine("[6] Update Media");
+                    Console.WriteLine("[7] Exit");
 
-                Console.Write("Enter your choice: ");
+                    Console.Write("Enter your choice: ");
 
-                int choice = Convert.ToInt32(Console.ReadLine());
+                    int choice = Convert.ToInt32(Console.ReadLine());
 
-                switch (choice)
-                {
-                    case 1:
-                        mgr.AddMedia();
-                        continue;
-                    case 2:
-                        mgr.RemoveMedia();
-                        continue;
-                    case 3:
-                        mgr.Search();
-                        continue;
-                    case 4:
-                        mgr.ListItems();    
-                        continue;
-                    case 5:
-                        mgr.GetInsights();
-                        continue;
-                    case 6:
-                        mgr.UpdateMedia();
-                        continue;
-                    case 7:
-                        Console.WriteLine("\nSuccessfully exited the Inventory");
-                        break;
-                    default:
-                        Console.WriteLine("Invalid choice.");
-                        continue;
+                    switch (choice)
+                    {
+                        case 1:
+                            mgr.AddMedia();
+                            continue;
+                        case 2:
+                            mgr.RemoveMedia();
+                            continue;
+                        case 3:
+                            mgr.Search();
+                            continue;
+                        case 4:
+                            mgr.ListItems();    
+                            continue;
+                        case 5:
+                            mgr.GetInsights();
+                            continue;
+                        case 6:
+                            mgr.UpdateMedia();
+                            continue;
+                        case 7:
+                            Console.WriteLine("\nSuccessfully exited the Inventory");
+                            break;
+                        default:
+                            Console.WriteLine("Invalid choice.");
+                            continue;
+                    }
+
+                    break;
+                } catch (FormatException) { //If the user inputs characters or strings instead of numbers
+                    Console.WriteLine("Choice must be a number!");
+                    continue;
+                } catch (Exception ex) { //Any exception that might get thrown that hasn't been thought of
+                    Console.WriteLine(ex.Message);
+                    continue;
                 }
-
-                break;
             }
         }
     }
