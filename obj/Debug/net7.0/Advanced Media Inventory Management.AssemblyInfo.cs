@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Advanced Media Inventory Management")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5b27726554644382310d0b44cad3117e9d544341")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4e2d5a159528b11162f72f8ebfb464346f4b820c")]
 [assembly: System.Reflection.AssemblyProductAttribute("Advanced Media Inventory Management")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Advanced Media Inventory Management")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

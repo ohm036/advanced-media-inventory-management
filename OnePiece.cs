@@ -145,15 +145,15 @@ namespace Assignment
                         case 1:
                             Book book = new();
                             Inventory.Add(book);
-                            continue;
+                            break;
                         case 2:
                             CD cd = new();
                             Inventory.Add(cd);
-                            continue;
+                            break;
                         case 3: 
                             DVD dvd = new();
                             Inventory.Add(dvd);
-                            continue;
+                            break;
                         case 4:
                             break;
                         default:
